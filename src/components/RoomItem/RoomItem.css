@@ -1,0 +1,42 @@
+.room__item {
+  display: grid;
+  padding: 9px 0;
+  grid-template-columns: auto 1fr auto;
+  height: 70px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.room__item .active {
+  background-color: #eee;
+}
+
+.room__item__icon {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
+}
+.room__name {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.room__item__message {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  color: #676767;
+}
+
+.room__item__time {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.active {
+  background-color: #eee;
+}

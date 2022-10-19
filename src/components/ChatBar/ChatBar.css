@@ -1,0 +1,17 @@
+.logo {
+  height: 20px;
+  width: auto;
+  margin-bottom: 18px;
+}
+
+.chat__rooms {
+  margin-top: 30px;
+}
+
+.chat__sidebar {
+  height: 100%;
+  background-color: #fff;
+  flex: 0.2;
+  padding: 25px;
+  border-right: 1px solid #eee;
+}
