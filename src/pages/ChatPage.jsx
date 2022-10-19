@@ -20,7 +20,6 @@ const ChatPage = () => {
     <div className="chat">
       <ChatBar handlerRoom={handlerRoom} messages={messages} users={users} />
       <div
-        // className="chat__main"
         className={
           chatSelected ? 'chat__main chat__main-selected' : 'chat__main'
         }

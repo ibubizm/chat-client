@@ -22,12 +22,16 @@
 }
 
 .back__btn {
+  display: none;
   outline: none;
   border: none;
   background-color: inherit;
 }
 
 @media (max-width: 540px) {
+  .back__btn {
+    display: block;
+  }
   .chat__header {
     padding: 20px;
   }

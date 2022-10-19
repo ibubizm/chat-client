@@ -13,7 +13,7 @@ export const RoomItem = ({ roomId, active, handlerRoom }) => {
       />
       <div className="room__item__detail">
         <div className="room__item__name">{roomId}</div>
-        <div className="room__item__message"></div>
+        <div className="room__item__message">Когда сможешь взять задачу?</div>
       </div>
       <div className="room__item__time">12:21</div>
     </div>
