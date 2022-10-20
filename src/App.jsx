@@ -5,13 +5,6 @@ import ChatPage from './pages/ChatPage'
 import { uniqueNamesGenerator, colors, animals } from 'unique-names-generator'
 
 function App() {
-  // const [user, setUser] = useState({
-  //   userName: '',
-  //   avatar: '',
-  //   roomId: 'mainRoom',
-  //   userId: '',
-  // })
-
   useEffect(() => {
     if (!localStorage.getItem('userName')) {
       const randomName = uniqueNamesGenerator({

@@ -1,21 +1,25 @@
 import './RoomItem.css'
 
-export const RoomItem = ({ roomId, active, handlerRoom }) => {
+export const RoomItem = ({ room, handlerRoom }) => {
   return (
     <div
-      onClick={() => handlerRoom(roomId)}
-      className={active ? 'room__item active' : 'room__item '}
+      onClick={() => handlerRoom(room)}
+      className={
+        localStorage.getItem('roomId') == room.roomId
+          ? 'room__item room__item-active'
+          : 'room__item'
+      }
     >
-      <img
-        className="room__item__icon"
-        src={'https://avatars.githubusercontent.com/u/66380357?v=4'}
-        alt=""
-      />
+      <img className="room__item__icon" src={room.roomAvatar} alt="" />
       <div className="room__item__detail">
-        <div className="room__item__name">{roomId}</div>
-        <div className="room__item__message">Когда сможешь взять задачу?</div>
+        <div className="room__item__name">{room.roomId}</div>
+        <div className="room__item__message">
+          {room.text ? room.text : 'Когда сможешь взять задачу?'}
+        </div>
       </div>
-      <div className="room__item__time">12:21</div>
+      <div className="room__item__time">
+        {new Date(room.date).toLocaleTimeString()}
+      </div>
     </div>
   )
 }

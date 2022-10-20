@@ -7,24 +7,32 @@ import useChat from '../hooks/useChat'
 import { useState } from 'react'
 
 const ChatPage = () => {
-  const { messages, users, sendMessage } = useChat()
+  const { messages, users, sendMessage, rooms, setUser, user } = useChat()
   const [chatSelected, setChatSelected] = useState(false)
+  const [currentRoom, setCurrentRoom] = useState({})
 
-  const handlerRoom = (roomId) => {
+  const handlerRoom = (room) => {
     setChatSelected(true)
-    localStorage.setItem('roomId', roomId)
-    // window.location.reload()
+    setCurrentRoom(room)
+    setUser({ ...user, roomId: room.roomId })
+    localStorage.setItem('roomId', room.roomId)
   }
 
   return (
     <div className="chat">
-      <ChatBar handlerRoom={handlerRoom} messages={messages} users={users} />
+      <ChatBar
+        rooms={rooms}
+        handlerRoom={handlerRoom}
+        messages={messages}
+        users={users}
+      />
       <div
         className={
           chatSelected ? 'chat__main chat__main-selected' : 'chat__main'
         }
       >
         <ChatHeader
+          currentRoom={currentRoom}
           setChatSelected={setChatSelected}
           chatSelected={chatSelected}
         />

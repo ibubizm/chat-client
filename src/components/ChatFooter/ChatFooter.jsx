@@ -42,7 +42,13 @@ export const ChatFooter = ({ sendMessage }) => {
 
   return (
     <div className="chat__footer">
-      <form className="form">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSendMessage()
+        }}
+        className="form"
+      >
         <textarea
           onChange={(e) => {
             setMessage(e.target.value)

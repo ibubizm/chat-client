@@ -16,25 +16,31 @@ export default function useChat() {
 
   const [users, setUsers] = useState([])
   const [messages, setMessages] = useState([])
+  const [rooms, setRooms] = useState([])
 
   const { current: socket } = useRef(
     io(SERVER_URI, {
       query: {
-        // avatar: user.avatar,
         roomId: user.roomId,
         userName: user.userName,
-        rooms: ['mainRoom', 'second'],
       },
     })
   )
 
   useEffect(() => {
+    socket.emit('message:get', roomId)
+  }, [roomId])
+
+  useEffect(() => {
     socket.emit('user:add', user)
 
-    socket.emit('user:create', user)
+    // socket.emit('message:get', roomId)
 
-    socket.emit('message:get')
+    socket.emit('rooms:get')
 
+    socket.on('rooms:update', (rooms) => {
+      setRooms(rooms)
+    })
     socket.on('user_list:update', (users) => {
       setUsers(users)
     })
@@ -52,5 +58,5 @@ export default function useChat() {
     socket.emit('message:remove', message)
   }
 
-  return { users, messages, sendMessage, removeMessage }
+  return { users, messages, sendMessage, removeMessage, rooms, setUser, user }
 }

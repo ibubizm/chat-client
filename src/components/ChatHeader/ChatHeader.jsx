@@ -1,7 +1,7 @@
 import './ChatHeader.css'
 import backImg from './back.svg'
 
-export const ChatHeader = ({ chatSelected, setChatSelected }) => {
+export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
   return (
     <div className="chat__header">
       {chatSelected && (
@@ -9,12 +9,8 @@ export const ChatHeader = ({ chatSelected, setChatSelected }) => {
           <img src={backImg} alt="" />
         </button>
       )}
-      <img
-        src={'https://avatars.githubusercontent.com/u/66380357?v=4'}
-        className="chat__header__img"
-        alt=""
-      />
-      <div className="chat__header__name">{localStorage.getItem('roomId')}</div>
+      <img src={currentRoom.roomAvatar} className="chat__header__img" alt="" />
+      <div className="chat__header__name">{currentRoom.roomId}</div>
     </div>
   )
 }

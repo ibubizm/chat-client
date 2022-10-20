@@ -1,13 +1,13 @@
 .room__item {
   display: grid;
-  padding: 9px 0;
+  padding: 9px 21px;
   grid-template-columns: auto 1fr auto;
   height: 70px;
   width: 100%;
   cursor: pointer;
 }
 
-.room__item .active {
+.room__item-active {
   background-color: #eee;
 }
 
