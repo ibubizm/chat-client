@@ -21,7 +21,7 @@ export default function useChat() {
   const { current: socket } = useRef(
     io(SERVER_URI, {
       query: {
-        roomId: user.roomId,
+        roomId: 'user.roomId',
         userName: user.userName,
       },
     })
@@ -34,7 +34,7 @@ export default function useChat() {
   useEffect(() => {
     socket.emit('user:add', user)
 
-    // socket.emit('message:get', roomId)
+    socket.emit('message:get', roomId)
 
     socket.emit('rooms:get')
 

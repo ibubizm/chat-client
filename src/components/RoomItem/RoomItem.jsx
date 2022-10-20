@@ -1,3 +1,4 @@
+import { timeFunc } from '../../halpers'
 import './RoomItem.css'
 
 export const RoomItem = ({ room, handlerRoom }) => {
@@ -14,12 +15,10 @@ export const RoomItem = ({ room, handlerRoom }) => {
       <div className="room__item__detail">
         <div className="room__item__name">{room.roomId}</div>
         <div className="room__item__message">
-          {room.text ? room.text : 'Когда сможешь взять задачу?'}
+          {room.text ? room.text : 'Пусто'}
         </div>
       </div>
-      <div className="room__item__time">
-        {new Date(room.date).toLocaleTimeString()}
-      </div>
+      <div className="room__item__time">{timeFunc(room.date)}</div>
     </div>
   )
 }

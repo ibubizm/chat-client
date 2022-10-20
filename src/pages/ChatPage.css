@@ -19,20 +19,22 @@
     overflow-y: hidden;
     position: relative;
   }
-  .chat__sidebar {
-    width: 100%;
-  }
+
   .chat__main {
+    /* display: none; */
     z-index: 10;
     transition: 0.2s;
     width: 100vw;
     height: 100vh;
     position: absolute;
-    left: 100%;
+    /* left: 100vw; */
+    right: -100vw;
   }
 
   .chat__main-selected {
-    left: 0;
+    /* display: grid; */
+    right: 0;
+    /* left: 0; */
     transition: 0.2s;
   }
   .chat__main-selected .chat__header {

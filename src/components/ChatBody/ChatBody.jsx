@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { timeFunc } from '../../halpers'
 import './ChatBody.css'
 
 export const ChatBody = ({ messages }) => {
@@ -32,7 +33,7 @@ export const ChatBody = ({ messages }) => {
             >
               <span className="message__text"> {message.text}</span>
               <span className="message__time">
-                {new Date(message.createdAt).toLocaleTimeString()}
+                {timeFunc(message.createdAt)}
               </span>
             </div>
           </div>

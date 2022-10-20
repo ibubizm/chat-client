@@ -15,7 +15,11 @@
 .chat__sidebar {
   height: 100%;
   background-color: #fff;
-  /* flex: 0.2;
-  padding: 25px; */
   border-right: 1px solid #eee;
+}
+
+@media (max-width: 540px) {
+  .chat__sidebar {
+    width: 100vw;
+  }
 }
