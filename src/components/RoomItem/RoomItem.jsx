@@ -1,7 +1,8 @@
+import { memo } from 'react'
 import { timeFunc } from '../../halpers'
 import './RoomItem.css'
 
-export const RoomItem = ({ room, handlerRoom }) => {
+export const RoomItem = memo(({ room, handlerRoom }) => {
   return (
     <div
       onClick={() => handlerRoom(room)}
@@ -11,14 +12,15 @@ export const RoomItem = ({ room, handlerRoom }) => {
           : 'room__item'
       }
     >
+      {console.log(room)}
       <img className="room__item__icon" src={room.roomAvatar} alt="" />
       <div className="room__item__detail">
         <div className="room__item__name">{room.roomId}</div>
         <div className="room__item__message">
-          {room.text ? room.text : 'Пусто'}
+          {room.lastMessage ? room.lastMessage : 'Пусто'}
         </div>
       </div>
-      <div className="room__item__time">{timeFunc(room.date)}</div>
+      <div className="room__item__time">{timeFunc(room.updatedAt)}</div>
     </div>
   )
-}
+})

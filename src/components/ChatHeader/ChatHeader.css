@@ -26,6 +26,7 @@
   outline: none;
   border: none;
   background-color: inherit;
+  cursor: pointer;
 }
 
 @media (max-width: 540px) {
