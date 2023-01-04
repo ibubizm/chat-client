@@ -5,6 +5,7 @@
   height: 70px;
   width: 100%;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .room__item-active {

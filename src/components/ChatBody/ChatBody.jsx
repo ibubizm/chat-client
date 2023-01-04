@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { timeFunc } from '../../halpers'
 import './ChatBody.css'
 
-export const ChatBody = ({ messages }) => {
+export const ChatBody = ({ messages, loading }) => {
   const messagesEndRef = useRef(null)
 
   useEffect(() => {
@@ -13,33 +13,35 @@ export const ChatBody = ({ messages }) => {
 
   return (
     <>
-      <div className="message__container">
-        {messages.map((message) => (
-          <div
-            key={message.messageId}
-            className={
-              localStorage.getItem('userId') === message.userId
-                ? 'message__block my__message'
-                : 'message__block'
-            }
-          >
-            <img className="st" src={message.avatar} />
+      {!loading && (
+        <div className="message__container">
+          {messages.map((message) => (
             <div
+              key={message.messageId}
               className={
                 localStorage.getItem('userId') === message.userId
-                  ? 'message my'
-                  : 'message'
+                  ? 'message__block my__message'
+                  : 'message__block'
               }
             >
-              <span className="message__text"> {message.text}</span>
-              <span className="message__time">
-                {timeFunc(message.createdAt)}
-              </span>
+              <img className="st" src={message.avatar} />
+              <div
+                className={
+                  localStorage.getItem('userId') === message.userId
+                    ? 'message my'
+                    : 'message'
+                }
+              >
+                <span className="message__text"> {message.text}</span>
+                <span className="message__time">
+                  {timeFunc(message.createdAt)}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
-        <span ref={messagesEndRef}></span>
-      </div>
+          ))}
+          <span ref={messagesEndRef}></span>
+        </div>
+      )}
     </>
   )
 }

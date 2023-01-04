@@ -15,7 +15,6 @@ export default function useChat() {
     roomAvatar: 'https://avatars.githubusercontent.com/u/66380357?v=4',
   })
 
-  // const [users, setUsers] = useState([])
   const [messages, setMessages] = useState([])
   const [rooms, setRooms] = useState([])
   const [roomsTest, setRoomsTest] = useState([])
@@ -45,38 +44,37 @@ export default function useChat() {
 
     socket.current.emit('message:get', roomId)
 
-    socket.current.emit('rooms:get')
+    socket.current.emit('room:get')
 
-    socket.current.emit('roo:get')
-
-    socket.current.on('rooms:update', (rooms) => {
+    socket.current.on('room_list:update', (rooms) => {
       setRooms(rooms)
+      console.log('rooms--update', rooms)
     })
-    // socket.on('user_list:update', (users) => {
-    //   setUsers(users)
-    // })
 
     socket.current.on('message_list:update', (messages) => {
       setMessages(messages)
+      console.log('message_list:update')
     })
 
-    socket.current.on('rooms:all', (roo) => {
-      console.log(roo)
-      setRoomsTest(roo)
+    socket.current.on('rooms:all', (rooms) => {
+      // setRoomsTest(rooms)
+      setRooms(rooms)
     })
-
     return () => {
       socket.current.disconnect()
     }
   }, [roomId])
 
   const createRoom = (room) => {
-    console.log(room)
     socket.current.emit('rooms:create', room)
   }
 
   const sendMessage = (message) => {
     socket.current.emit('message:add', message)
+  }
+
+  const roomUpdate = (mes) => {
+    socket.current.emit('room:update', mes)
   }
 
   // const removeMessage = (message) => {
@@ -90,7 +88,8 @@ export default function useChat() {
     setRooms,
     setUser,
     user,
-    roomsTest,
+    // roomsTest,
     createRoom,
+    roomUpdate,
   }
 }

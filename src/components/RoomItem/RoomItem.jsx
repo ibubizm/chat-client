@@ -7,12 +7,11 @@ export const RoomItem = memo(({ room, handlerRoom }) => {
     <div
       onClick={() => handlerRoom(room)}
       className={
-        localStorage.getItem('roomId') == room.roomId
+        localStorage.getItem('roomId') === room.roomId
           ? 'room__item room__item-active'
           : 'room__item'
       }
     >
-      {console.log(room)}
       <img className="room__item__icon" src={room.roomAvatar} alt="" />
       <div className="room__item__detail">
         <div className="room__item__name">{room.roomId}</div>

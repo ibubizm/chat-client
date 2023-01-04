@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import sendIcon from './send.svg'
 import './ChatFooter.css'
 
-export const ChatFooter = ({ sendMessage }) => {
+export const ChatFooter = ({ sendMessage, roomUpdate }) => {
   const [message, setMessage] = useState('')
   const ref = useRef(null)
 
@@ -10,15 +10,15 @@ export const ChatFooter = ({ sendMessage }) => {
     ref.current.focus()
     let scHeight = ref.current.scrollHeight
 
-    if (e.shiftKey && e.key == 'Enter') {
+    if (e.shiftKey && e.key === 'Enter') {
       ref.current.style.height = `${scHeight + 18}px`
     }
-    if (!e.shiftKey && e.key == 'Enter') {
+    if (!e.shiftKey && e.key === 'Enter') {
       e.preventDefault()
       handleSendMessage()
     }
 
-    if (e.key == 'Backspace') {
+    if (e.key === 'Backspace') {
       ref.current.style.height = `${scHeight - 18}px`
     }
   }
@@ -34,6 +34,7 @@ export const ChatFooter = ({ sendMessage }) => {
     }
     if (message !== '') {
       sendMessage(mes)
+      roomUpdate(mes)
     } else {
       alert('empty')
     }

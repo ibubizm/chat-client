@@ -18,6 +18,10 @@
   border-right: 1px solid #eee;
 }
 
+.chat__empty {
+  margin: 20px;
+}
+
 @media (max-width: 540px) {
   .chat__sidebar {
     width: 100vw;
