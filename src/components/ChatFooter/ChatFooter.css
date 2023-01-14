@@ -17,3 +17,19 @@
   background: none;
   outline: none;
 }
+
+@media (max-width: 390px) {
+  .form {
+    gap: 10px;
+  }
+  .textarea {
+    min-height: 40px;
+    font-size: 18px;
+  }
+  .button__send {
+    height: 100%;
+  }
+  .send__icon {
+    height: 100%;
+  }
+}

@@ -41,3 +41,13 @@
   background-color: #eeeeee;
   color: rgba(0, 0, 0, 0.45);
 }
+
+@media (max-width: 390px) {
+  .input {
+    height: 48px;
+    font-size: 18px;
+  }
+  .input__icon {
+    padding-left: 30px;
+  }
+}

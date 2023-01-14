@@ -27,3 +27,16 @@
     width: 100vw;
   }
 }
+
+@media (max-width: 390px) {
+  .room__item__icon {
+    width: 55px;
+    height: 55px;
+  }
+  .room__item__name {
+    font-size: 20px;
+  }
+  .room__item__message {
+    font-size: 18px;
+  }
+}

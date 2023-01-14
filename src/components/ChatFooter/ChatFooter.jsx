@@ -63,7 +63,7 @@ export const ChatFooter = ({ sendMessage, roomUpdate }) => {
           onKeyDown={onKey}
         />
         <button className="button__send">
-          <img src={sendIcon} alt="" />
+          <img className="send__icon" src={sendIcon} alt="" />
         </button>
       </form>
     </div>

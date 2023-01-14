@@ -50,3 +50,13 @@
   height: 24px;
   border-radius: 50%;
 }
+
+@media (max-width: 390px) {
+  .message__text {
+    font-size: 19px;
+  }
+  .st {
+    width: 33px;
+    height: 33px;
+  }
+}
