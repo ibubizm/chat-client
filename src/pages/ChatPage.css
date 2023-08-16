@@ -25,7 +25,7 @@
     z-index: 10;
     transition: 0.2s;
     width: 100vw;
-    /* height: 100vh; */
+    height: 100svh;
     position: absolute;
     right: -100vw;
   }
