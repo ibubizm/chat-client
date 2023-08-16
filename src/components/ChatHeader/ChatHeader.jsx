@@ -9,8 +9,18 @@ export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
           <img src={backImg} alt="" />
         </button>
       )}
-      <img src={currentRoom.roomAvatar} className="chat__header__img" alt="" />
-      <div className="chat__header__name">{currentRoom.roomId}</div>
+      {currentRoom.roomId === null ? (
+        'select a chat'
+      ) : (
+        <>
+          <img
+            src={currentRoom.roomAvatar}
+            className="chat__header__img"
+            alt=""
+          />
+          <div className="chat__header__name">{currentRoom.roomId}</div>
+        </>
+      )}
     </div>
   )
 }

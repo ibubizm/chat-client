@@ -4,10 +4,6 @@ import { images } from './images'
 import ChatPage from './pages/ChatPage'
 import { uniqueNamesGenerator, colors, animals } from 'unique-names-generator'
 
-import { io } from 'socket.io-client'
-import { SERVER_URI } from './constatnts'
-import { useState } from 'react'
-
 function App() {
   useEffect(() => {
     if (!localStorage.getItem('userName')) {
@@ -20,7 +16,7 @@ function App() {
         'avatar',
         images[Math.floor(Math.random() * images.length)]
       )
-      localStorage.setItem('roomId', 'mainRoom')
+      // localStorage.setItem('roomId', 'mainRoom')
     }
   }, [])
   return <ChatPage />

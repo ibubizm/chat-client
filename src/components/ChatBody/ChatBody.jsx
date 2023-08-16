@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react'
-import { timeFunc } from '../../halpers'
 import './ChatBody.css'
+import { Message } from './Message'
 
-export const ChatBody = ({ messages, loading }) => {
+export const ChatBody = ({ messages, loading, removeMessage, editMessage }) => {
   const messagesEndRef = useRef(null)
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({
       behavior: 'smooth',
@@ -15,29 +14,13 @@ export const ChatBody = ({ messages, loading }) => {
     <>
       {!loading && (
         <div className="message__container">
-          {messages.map((message) => (
-            <div
-              key={message.messageId}
-              className={
-                localStorage.getItem('userId') === message.userId
-                  ? 'message__block my__message'
-                  : 'message__block'
-              }
-            >
-              <img className="st" src={message.avatar} />
-              <div
-                className={
-                  localStorage.getItem('userId') === message.userId
-                    ? 'message my'
-                    : 'message'
-                }
-              >
-                <span className="message__text"> {message.text}</span>
-                <span className="message__time">
-                  {timeFunc(message.createdAt)}
-                </span>
-              </div>
-            </div>
+          {messages.map((message, id) => (
+            <Message
+              key={message._id + id}
+              message={message}
+              removeMessage={removeMessage}
+              editMessage={editMessage}
+            />
           ))}
           <span ref={messagesEndRef}></span>
         </div>

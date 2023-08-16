@@ -8,6 +8,7 @@
 
 .chat__main {
   height: 100vh;
+  position: relative;
   display: grid;
   grid-template-rows: 61px 1fr auto;
 }
@@ -21,20 +22,16 @@
   }
 
   .chat__main {
-    /* display: none; */
     z-index: 10;
     transition: 0.2s;
     width: 100vw;
     height: 100vh;
     position: absolute;
-    /* left: 100vw; */
     right: -100vw;
   }
 
   .chat__main-selected {
-    /* display: grid; */
     right: 0;
-    /* left: 0; */
     transition: 0.2s;
   }
   .chat__main-selected .chat__header {
