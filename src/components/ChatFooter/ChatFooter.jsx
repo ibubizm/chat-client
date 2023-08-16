@@ -58,7 +58,7 @@ export const ChatFooter = ({ sendMessage, roomUpdate }) => {
           className="textarea"
           ref={ref}
           type="text"
-          placeholder="Введите свое сообщение здесь.."
+          placeholder="Введите сообщение"
           value={message}
           onKeyDown={onKey}
         />

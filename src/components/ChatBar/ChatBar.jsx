@@ -13,29 +13,23 @@ export const ChatBar = ({ rooms, handlerRoom }) => {
 
   return (
     <div className="chat__sidebar">
-      <div>
-        <div className="label">
-          <h2 className="logo">IBUChat</h2>
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            icon={true}
-            placeholder={'Поиск'}
-          />
-        </div>
-        <div className="chat__rooms">
-          {filtredRooms.length > 0 ? (
-            filtredRooms.map((room) => (
-              <RoomItem
-                key={room.roomId}
-                room={room}
-                handlerRoom={handlerRoom}
-              />
-            ))
-          ) : (
-            <div className="chat__empty">Пусто...</div>
-          )}
-        </div>
+      <div className="label">
+        <h2 className="logo">IBUChat</h2>
+        <Input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          icon={true}
+          placeholder={'Поиск'}
+        />
+      </div>
+      <div className="chat__rooms">
+        {filtredRooms.length > 0 ? (
+          filtredRooms.map((room) => (
+            <RoomItem key={room.roomId} room={room} handlerRoom={handlerRoom} />
+          ))
+        ) : (
+          <div className="chat__empty">Пусто...</div>
+        )}
       </div>
     </div>
   )
