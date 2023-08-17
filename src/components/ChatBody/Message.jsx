@@ -1,15 +1,16 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { timeFunc } from '../../halpers'
 import useContextMenu from '../../hooks/useContextMenu'
+import { FaEdit } from 'react-icons/fa'
+import { MdDelete } from 'react-icons/md'
 
-export const Message = ({ message, removeMessage, editMessage }) => {
+export const Message = memo(({ message, removeMessage, editMessage }) => {
   const [toggleEdit, setToggleEdit] = useState(false)
   const [editValue, setEditValue] = useState(message.text)
 
   const { clicked, setClicked, points, setPoints } = useContextMenu()
 
   const onEdit = () => {
-    console.log({ ...message, text: editValue })
     editMessage({ ...message, text: editValue })
     setToggleEdit(false)
   }
@@ -71,18 +72,20 @@ export const Message = ({ message, removeMessage, editMessage }) => {
         >
           <li
             className="context__list__item"
-            onClick={() => removeMessage(message)}
+            onClick={() => setToggleEdit(true)}
           >
-            delete
+            <FaEdit />
+            edit
           </li>
           <li
             className="context__list__item"
-            onClick={() => setToggleEdit(true)}
+            onClick={() => removeMessage(message)}
           >
-            edit
+            <MdDelete />
+            delete
           </li>
         </ul>
       )}
     </div>
   )
-}
+})

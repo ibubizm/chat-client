@@ -14,9 +14,9 @@ export const ChatBody = ({ messages, loading, removeMessage, editMessage }) => {
     <>
       {!loading && (
         <div className="message__container">
-          {messages.map((message, id) => (
+          {messages.map((message) => (
             <Message
-              key={message._id + id}
+              key={message._id}
               message={message}
               removeMessage={removeMessage}
               editMessage={editMessage}
