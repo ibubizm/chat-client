@@ -6,6 +6,12 @@ import { uniqueNamesGenerator, colors, animals } from 'unique-names-generator'
 
 function App() {
   useEffect(() => {
+    if (!localStorage.getItem('selectedTheme')) {
+      document.querySelector('body').setAttribute('data-theme', 'light')
+    } else {
+      const theme = localStorage.getItem('selectedTheme')
+      document.querySelector('body').setAttribute('data-theme', theme)
+    }
     if (!localStorage.getItem('userName')) {
       const randomName = uniqueNamesGenerator({
         dictionaries: [colors, animals],

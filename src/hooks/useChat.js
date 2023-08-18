@@ -28,6 +28,7 @@ export default function useChat() {
       },
     })
 
+    socket.current.on('conect', (users) => console.log(users))
     socket.current.emit('user:add', user)
 
     socket.current.emit('message:get', roomId)
@@ -38,6 +39,9 @@ export default function useChat() {
       setRooms(rooms)
     })
 
+    // socket.current.on('user:created', (user) => {
+    //   console.log(user, '-------user')
+    // })
     socket.current.on('message_list:update', (messages) => {
       setMessages(messages)
       setLoading(false)
@@ -51,6 +55,11 @@ export default function useChat() {
       socket.current.disconnect()
     }
   }, [roomId])
+
+  const createUser = (user) => {
+    console.log(user)
+    socket.current.emit('user:create', user)
+  }
 
   const createRoom = (room) => {
     socket.current.emit('rooms:create', room)
@@ -84,5 +93,6 @@ export default function useChat() {
     roomUpdate,
     removeMessage,
     editMessage,
+    createUser,
   }
 }

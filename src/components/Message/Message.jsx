@@ -1,3 +1,4 @@
+import './message.css'
 import { memo, useState } from 'react'
 import { timeFunc } from '../../halpers'
 import useContextMenu from '../../hooks/useContextMenu'

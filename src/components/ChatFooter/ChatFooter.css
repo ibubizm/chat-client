@@ -1,7 +1,7 @@
 .chat__footer {
   padding: 12px 15px;
-  background-color: #fff;
-  border-top: 1px solid #eee;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--bg-active);
 }
 .form {
   width: 100%;
@@ -16,6 +16,7 @@
   border: none;
   background: none;
   outline: none;
+  color: var(--secondery-color);
 }
 
 @media (max-width: 390px) {

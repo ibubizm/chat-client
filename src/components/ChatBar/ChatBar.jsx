@@ -1,10 +1,22 @@
 import { Input } from '../input/input'
+import { Modal } from '../modal/modal'
 import { RoomItem } from '../RoomItem/RoomItem'
 import './ChatBar.css'
 import { useState } from 'react'
+import { AiFillSetting } from 'react-icons/ai'
+import { SettingsMenu } from '../SettingsMenu/SettingsMenu'
 
-export const ChatBar = ({ rooms, handlerRoom }) => {
+export const ChatBar = ({ rooms, handlerRoom, createUser }) => {
   const [input, setInput] = useState('')
+  const [modal, setModal] = useState(false)
+
+  const openModal = () => {
+    setModal(true)
+  }
+
+  const onClose = () => {
+    setModal(false)
+  }
 
   const filtredRooms = rooms.filter((room) =>
     room.roomId.toLowerCase().includes(input.toLowerCase())
@@ -14,7 +26,10 @@ export const ChatBar = ({ rooms, handlerRoom }) => {
   return (
     <div className="chat__sidebar">
       <div className="label">
-        <h2 className="logo">IBUChat</h2>
+        <div className="label__detail">
+          <h2 className="logo">IBUChat</h2>
+          <AiFillSetting className="setting-icon" onClick={openModal} />
+        </div>
         <Input
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -31,6 +46,11 @@ export const ChatBar = ({ rooms, handlerRoom }) => {
           <div className="chat__empty">Пусто...</div>
         )}
       </div>
+      {modal && (
+        <Modal title={'setting'} onClose={onClose}>
+          <SettingsMenu createUser={createUser} />
+        </Modal>
+      )}
     </div>
   )
 }

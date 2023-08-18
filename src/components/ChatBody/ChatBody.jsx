@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import './ChatBody.css'
-import { Message } from './Message'
+import { Message } from '../Message/Message'
 
 export const ChatBody = ({ messages, loading, removeMessage, editMessage }) => {
   const messagesEndRef = useRef(null)

@@ -1,7 +1,7 @@
 .message__container {
   width: 100%;
   background: url('./Group.png');
-  background-color: #fafafa;
+  background-color: var(--heading-color);
   padding: 20px;
   overflow-y: scroll;
 }
@@ -10,62 +10,18 @@
   margin-bottom: 18px;
 }
 
-.message {
-  display: flex;
-  flex-direction: column;
-  padding: 12px 18px 6px 18px;
-  gap: 4px;
-  position: relative;
-
-  background: #f4f4f7;
-  border-radius: 0px 16px 16px 16px;
-}
-
-.my {
-  /* display: flex; */
-  justify-content: flex-end;
-  border-radius: 16px 16px 0px 16px;
-}
-
-.message__block {
-  display: flex;
-}
-
-.message__footer {
-  display: flex;
-  gap: 10px;
-}
-.my__message {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.message__time {
-  display: flex;
-  justify-content: end;
-  font-weight: 300;
-  font-size: 12px;
-  line-height: 16px;
-  color: rgba(0, 0, 0, 0.45);
-}
-
-.st {
-  margin-right: 9px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-}
-
 .context__list {
   position: absolute;
   border-radius: 7px;
   list-style: none;
-  border: 1px solid #fafafa;
+  border: 1px solid var(--bg-active);
 
   margin: 0;
   /* padding: 3px 0 4px; */
 
-  background: rgba(255, 255, 255, 0.95);
+  /* background: rgba(255, 255, 255, 0.95); */
+  background: var(--bg-active);
+  color: var(--font-color);
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.35);
   z-index: 2;
   font-size: 14px;
@@ -78,7 +34,7 @@
   gap: 5px;
   padding: 10px 30px;
 
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--heading-color);
 }
 
 .context__list__item:first-child {
@@ -91,9 +47,9 @@
 }
 
 .context__list__item:hover {
-  background-color: #3f7dfb;
+  background-color: var(--primary-color);
   cursor: pointer;
-  color: #fff;
+  color: var(--font-color);
 }
 
 @media (max-width: 390px) {

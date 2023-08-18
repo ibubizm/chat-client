@@ -9,7 +9,7 @@
 }
 
 .room__item-active {
-  background-color: #eee;
+  background-color: var(--bg-active);
 }
 
 .room__item__icon {
@@ -24,11 +24,15 @@
   line-height: 18px;
 }
 
+.room__item__name {
+  color: var(--font-color);
+}
+
 .room__item__message {
   font-weight: 500;
   font-size: 12px;
   line-height: 20px;
-  color: #676767;
+  color: var(--font-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -39,9 +43,10 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  color: rgba(0, 0, 0, 0.65);
+  /* color: rgba(0, 0, 0, 0.65); */
+  color: var(--font-color);
 }
 
 .active {
-  background-color: #eee;
+  background-color: var(--bg-active);
 }

@@ -16,6 +16,7 @@ const ChatPage = () => {
     loading,
     removeMessage,
     editMessage,
+    createUser,
   } = useChat()
   const [chatSelected, setChatSelected] = useState(false)
   const [currentRoom, setCurrentRoom] = useState({
@@ -32,7 +33,11 @@ const ChatPage = () => {
 
   return (
     <div className="chat">
-      <ChatBar rooms={rooms} handlerRoom={handlerRoom} />
+      <ChatBar
+        rooms={rooms}
+        handlerRoom={handlerRoom}
+        createUser={createUser}
+      />
       <div
         className={
           chatSelected ? 'chat__main chat__main-selected' : 'chat__main'
