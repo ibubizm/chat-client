@@ -7,7 +7,7 @@
 }
 
 .chat__main {
-  /* position: relative; */
+  position: relative;
   display: grid;
   grid-template-rows: 61px 1fr auto;
   height: 100vh;
@@ -36,7 +36,7 @@
     overflow: visible;
     right: 0;
     transition: 0.2s;
-    background: #fff;
+    background: var(--bg-color);
   }
   .chat__main-selected .chat__header {
     justify-content: space-between;

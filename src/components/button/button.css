@@ -1,11 +1,25 @@
 .btn {
-  color: var(--font-active-color);
+  color: var(--message-color);
   background-color: var(--primary-color);
   padding: 20px 30px;
   border-radius: 7px;
   outline: none;
   cursor: pointer;
   border: none;
+}
+
+.sm {
+  padding: 5px 10px;
+}
+
+.access {
+  background: var(--primary-color);
+  color: var(--message-color);
+}
+
+.cancel {
+  background: var(--danger-color);
+  color: var(--message-color);
 }
 
 .btn:hover {

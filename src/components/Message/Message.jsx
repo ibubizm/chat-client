@@ -4,6 +4,8 @@ import { timeFunc } from '../../halpers'
 import useContextMenu from '../../hooks/useContextMenu'
 import { FaEdit } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
+import { Input } from '../input/input'
+import { Button } from '../button/Button'
 
 export const Message = memo(({ message, removeMessage, editMessage }) => {
   const [toggleEdit, setToggleEdit] = useState(false)
@@ -44,13 +46,23 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
         <span className="message__text">
           {toggleEdit ? (
             <>
-              <input
+              <Input
                 type="text"
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
               />
-              <button onClick={() => setToggleEdit(false)}>cancel</button>
-              <button onClick={onEdit}>edit</button>
+              <div className="message__edit__btn">
+                <Button
+                  className={'sm'}
+                  color={'cancel'}
+                  onClick={() => setToggleEdit(false)}
+                >
+                  cancel
+                </Button>
+                <Button className={'sm'} color={'access'} onClick={onEdit}>
+                  edit
+                </Button>
+              </div>
             </>
           ) : (
             message.text

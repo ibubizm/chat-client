@@ -45,3 +45,8 @@
   line-height: 16px;
   /* color: rgba(0, 0, 0, 0.45); */
 }
+
+.message__edit__btn {
+  display: flex;
+  gap: 5px;
+}
