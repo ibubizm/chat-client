@@ -24,6 +24,7 @@
 .modal__header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .modal__close {
@@ -44,4 +45,10 @@
 
 .input {
   margin-bottom: 10px;
+}
+
+@media (max-width: 390px) {
+  .modal__content {
+    /* padding: 0; */
+  }
 }

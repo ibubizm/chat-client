@@ -2,13 +2,20 @@ import { useEffect, useRef } from 'react'
 import './ChatBody.css'
 import { Message } from '../Message/Message'
 
-export const ChatBody = ({ messages, loading, removeMessage, editMessage }) => {
+export const ChatBody = ({
+  messages,
+  loading,
+  removeMessage,
+  editMessage,
+  room,
+}) => {
   const messagesEndRef = useRef(null)
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({
-      behavior: 'smooth',
-    })
-  }, [messages])
+
+  // useEffect(() => {
+  //   messagesEndRef.current?.scrollIntoView({
+  //     behavior: 'smooth',
+  //   })
+  // }, [messages])
 
   return (
     <>

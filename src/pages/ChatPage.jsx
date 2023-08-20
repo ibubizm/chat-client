@@ -51,6 +51,7 @@ const ChatPage = () => {
         {!loading && currentRoom.roomId !== null ? (
           <>
             <ChatBody
+              room={currentRoom}
               messages={messages}
               removeMessage={removeMessage}
               loading={loading}

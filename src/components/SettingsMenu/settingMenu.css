@@ -21,3 +21,16 @@
   padding: 20px;
   background-color: var(--heading-color);
 }
+
+@media (max-width: 390px) {
+  .setting {
+    display: grid;
+    gap: 20px;
+  }
+
+  .setting__field {
+    display: grid;
+    padding: 10px;
+    grid-template-columns: 1fr auto;
+  }
+}
