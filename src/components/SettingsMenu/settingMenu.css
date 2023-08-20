@@ -26,6 +26,7 @@
   .setting {
     display: grid;
     gap: 20px;
+    padding: 10px;
   }
 
   .setting__field {
@@ -33,8 +34,8 @@
     padding: 10px;
     grid-template-columns: 1fr auto;
   }
-  /* .setting__field:first-child {
+  .setting__field:first-child {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
-  } */
+  }
 }
