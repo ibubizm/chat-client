@@ -22,7 +22,7 @@
   background-color: var(--heading-color);
 }
 
-@media (max-width: 390px) {
+@media (max-width: 540px) {
   .setting {
     display: grid;
     gap: 20px;
@@ -33,4 +33,8 @@
     padding: 10px;
     grid-template-columns: 1fr auto;
   }
+  /* .setting__field:first-child {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  } */
 }

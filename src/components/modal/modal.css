@@ -49,6 +49,6 @@
 
 @media (max-width: 390px) {
   .modal__content {
-    /* padding: 0; */
+    padding: 10px;
   }
 }

@@ -26,7 +26,7 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
           ? 'message__block my__message'
           : 'message__block'
       }
-      onContextMenu={(e) => {
+      onDoubleClick={(e) => {
         e.preventDefault()
         setClicked(true)
         setPoints({

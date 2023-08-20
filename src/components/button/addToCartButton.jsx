@@ -1,4 +1,4 @@
-import './button.scss'
+import './button.css'
 import { GiCardboardBoxClosed } from 'react-icons/gi'
 import { HiShoppingCart } from 'react-icons/hi'
 
