@@ -53,12 +53,14 @@ export const SettingsMenu = ({ createUser }) => {
             onChange={(e) => setUserName(e.target.value)}
             placeholder="name"
           />
-          <Button className={'sm'} onClick={cancel}>
-            cancel
-          </Button>
-          <Button className={'sm'} onClick={() => setToggleEdit(false)}>
-            edit
-          </Button>
+          <div className="setting__input__btns">
+            <Button color={'cancel'} className={'sm'} onClick={cancel}>
+              cancel
+            </Button>
+            <Button className={'sm'} onClick={() => setToggleEdit(false)}>
+              edit
+            </Button>
+          </div>
         </div>
       )}
       <Button onClick={onSubmit}>save</Button>
