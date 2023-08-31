@@ -3,14 +3,14 @@ import './switcher.css'
 export const Switcher = ({ onChenge, selectedTheme }) => {
   return (
     <>
-      <label htmlFor="darkmode-toggle" class="switch">
+      <label htmlFor="darkmode-toggle" className="switch">
         <input
           id="darkmode-toggle"
           type="checkbox"
           onChange={(e) => onChenge(e)}
           defaultChecked={selectedTheme === 'dark'}
         />
-        <span class="slider round"></span>
+        <span className="slider round"></span>
       </label>
     </>
   )

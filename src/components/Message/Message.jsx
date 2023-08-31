@@ -1,15 +1,19 @@
 import './message.css'
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { timeFunc } from '../../halpers'
 import useContextMenu from '../../hooks/useContextMenu'
 import { FaEdit } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
 import { Input } from '../input/input'
 import { Button } from '../button/Button'
+import { useSelector } from 'react-redux'
+import { getImage } from '../../helpers/imageHalper'
 
 export const Message = memo(({ message, removeMessage, editMessage }) => {
+  const user = useSelector(({ toolkit }) => toolkit.user)
   const [toggleEdit, setToggleEdit] = useState(false)
   const [editValue, setEditValue] = useState(message.text)
+  const [ava, setAva] = useState('')
 
   const { clicked, setClicked, points, setPoints } = useContextMenu()
 
@@ -18,11 +22,15 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
     setToggleEdit(false)
   }
 
+  // useEffect(() => {
+  //   setAva(getImage(message.author.avatar))
+  // }, [mes])
+
   return (
     <div
       key={message.messageId}
       className={
-        localStorage.getItem('userId') === message.userId
+        user._id === message.userId
           ? 'message__block my__message'
           : 'message__block'
       }
@@ -35,14 +43,10 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
         })
       }}
     >
-      <img className="st" src={message.avatar} />
-      <div
-        className={
-          localStorage.getItem('userId') === message.userId
-            ? 'message my'
-            : 'message'
-        }
-      >
+      {message.author.avatar && (
+        <img className="st" src={getImage(message.author.avatar)} />
+      )}
+      <div className={user._id === message.userId ? 'message my' : 'message'}>
         <span className="message__text">
           {toggleEdit ? (
             <>
@@ -89,6 +93,13 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
           >
             <FaEdit />
             edit
+          </li>
+          <li
+            className="context__list__item"
+            onClick={() => setToggleEdit(true)}
+          >
+            <FaEdit />
+            replay
           </li>
           <li
             className="context__list__item"

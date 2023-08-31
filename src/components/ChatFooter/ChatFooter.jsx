@@ -1,8 +1,11 @@
 import { useState, useRef } from 'react'
 import sendIcon from './send.svg'
 import './ChatFooter.css'
+import { useSelector } from 'react-redux'
 
-export const ChatFooter = ({ sendMessage, roomUpdate }) => {
+export const ChatFooter = ({ sendMessage, roomUpdate, scrollFunc }) => {
+  const user = useSelector(({ toolkit }) => toolkit.user)
+  const room = useSelector(({ room }) => room.currentRoom)
   const [message, setMessage] = useState('')
   const ref = useRef(null)
 
@@ -24,21 +27,23 @@ export const ChatFooter = ({ sendMessage, roomUpdate }) => {
   }
 
   const handleSendMessage = () => {
-    const mes = {
-      avatar: localStorage.getItem('avatar'),
-      roomId: localStorage.getItem('roomId'),
-      messageId: Math.random(),
-      userId: localStorage.getItem('userId'),
-      userName: localStorage.getItem('userName'),
-      text: message,
-    }
     if (message !== '') {
-      sendMessage(mes)
-      roomUpdate(mes)
-    } else {
-      alert('empty')
+      const mes = {
+        author: user._id,
+        roomId: room._id,
+        messageId: Math.random(),
+        userId: user._id,
+        text: message,
+      }
+      if (message !== '') {
+        scrollFunc()
+        sendMessage(mes)
+        roomUpdate(mes)
+      } else {
+        alert('empty')
+      }
+      setMessage('')
     }
-    setMessage('')
   }
 
   return (

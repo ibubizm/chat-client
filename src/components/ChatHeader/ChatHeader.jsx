@@ -9,7 +9,7 @@ export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
           <img src={backImg} alt="" />
         </button>
       )}
-      {currentRoom.roomId === null ? (
+      {!currentRoom.roomId ? (
         'select a chat'
       ) : (
         <>

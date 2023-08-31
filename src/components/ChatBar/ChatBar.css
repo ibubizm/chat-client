@@ -1,3 +1,15 @@
+.chat__sidebar {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background-color: var(--bg-color);
+  border-right: 1px solid var(--bg-active);
+}
+
+.chat__empty {
+  margin: 20px;
+}
+
 .label {
   margin: 22px;
 }
@@ -26,17 +38,7 @@
 }
 
 .chat__rooms {
-  margin-top: 30px;
-}
-
-.chat__sidebar {
-  height: 100%;
-  background-color: var(--bg-color);
-  border-right: 1px solid var(--bg-active);
-}
-
-.chat__empty {
-  margin: 20px;
+  overflow: scroll;
 }
 
 @media (max-width: 540px) {

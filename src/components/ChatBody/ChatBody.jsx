@@ -7,29 +7,31 @@ export const ChatBody = ({
   loading,
   removeMessage,
   editMessage,
-  room,
+  messageEndRef,
 }) => {
-  const messagesEndRef = useRef(null)
+  // const messagesEndRef = useRef(null)
 
   // useEffect(() => {
-  //   messagesEndRef.current?.scrollIntoView({
-  //     behavior: 'smooth',
-  //   })
+  //   if (loading) {
+  //     messagesEndRef.current?.scrollIntoView({
+  //       behavior: 'smooth',
+  //     })
+  //   }
   // }, [messages])
 
   return (
     <>
       {!loading && (
         <div className="message__container">
-          {messages.map((message) => (
+          {messages.map((message, index) => (
             <Message
-              key={message._id}
+              key={message.text + index}
               message={message}
               removeMessage={removeMessage}
               editMessage={editMessage}
             />
           ))}
-          <span ref={messagesEndRef}></span>
+          <span ref={messageEndRef}></span>
         </div>
       )}
     </>

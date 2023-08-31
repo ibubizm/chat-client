@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { AiFillSetting } from 'react-icons/ai'
 import { SettingsMenu } from '../SettingsMenu/SettingsMenu'
 
-export const ChatBar = ({ rooms, handlerRoom, createUser }) => {
+export const ChatBar = ({ rooms, handlerRoom, createUser, createRoom }) => {
   const [input, setInput] = useState('')
   const [modal, setModal] = useState(false)
 
@@ -48,7 +48,11 @@ export const ChatBar = ({ rooms, handlerRoom, createUser }) => {
       </div>
       {modal && (
         <Modal title={'setting'} onClose={onClose}>
-          <SettingsMenu createUser={createUser} />
+          <SettingsMenu
+            createUser={createUser}
+            createRoom={createRoom}
+            onClose={onClose}
+          />
         </Modal>
       )}
     </div>

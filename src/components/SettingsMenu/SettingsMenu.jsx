@@ -4,53 +4,98 @@ import { useState } from 'react'
 import { FaEdit } from 'react-icons/fa'
 import { DarkMode } from '../DarkMode/DarkMode'
 import { Button } from '../button/Button'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateUser } from '../../http'
+import { getImage } from '../../helpers/imageHalper'
 
-export const SettingsMenu = ({ createUser }) => {
-  const [userName, setUserName] = useState(localStorage.getItem('userName'))
+export const SettingsMenu = ({ createRoom, onClose }) => {
+  const currentUser = useSelector(({ toolkit }) => toolkit.user)
+  const [newUserName, setNewUserName] = useState(currentUser.userName)
   const [toggleEdit, setToggleEdit] = useState(false)
-  const [avatar, setAvatar] = useState('')
+  const [avatar, setAvatar] = useState(currentUser.avatar)
+  const [newRoom, setNewRoom] = useState({
+    roomId: '',
+    roomAvatar: '',
+    admin: '',
+  })
+
+  const dispatch = useDispatch()
 
   const cancel = () => {
     setToggleEdit(false)
-    setUserName(localStorage.getItem('userName'))
+    setNewUserName(currentUser.userName)
   }
 
   const onSubmit = () => {
-    // const formData = new FormData()
-    // formData.append('userName', userName)
-    // formData.append('avatar', avatar)
-    const user = { avatar, userName }
-
-    createUser(user)
+    const user = new FormData()
+    user.append('userId', currentUser._id)
+    user.append('userName', newUserName)
+    user.append('avatar', avatar)
+    dispatch(updateUser(user))
+    onClose()
   }
+
+  const createChat = () => {
+    createRoom(newRoom)
+  }
+
   return (
     <div className="setting">
       <div className="setting__field">
-        {avatar ? (
+        {currentUser.avatar && (
+          <img
+            className="avatar"
+            src={getImage(currentUser.avatar)}
+            alt="ava"
+          />
+        )}
+        {/* {avatar ? (
           <img className="avatar" src={URL.createObjectURL(avatar)} alt="" />
         ) : (
-          <img className="avatar" src={localStorage.getItem('avatar')} alt="" />
-        )}
+          <img className="avatar" src={getImage(currentUser.avatar)} alt="" />
+        )} */}
         <input
           onChange={(e) => setAvatar(e.target.files[0])}
           type="file"
-          // accept="image/*, .png, .jpg"
+          accept="image/*, .png, .jpg"
         />
       </div>
       <div className="setting__field">
         dark theme
         <DarkMode />
       </div>
+      <div className="setting__field">
+        create room
+        <Input
+          placeholder={'room name'}
+          value={newRoom.roomId}
+          onChange={(e) =>
+            setNewRoom({
+              ...newRoom,
+              roomId: e.target.value,
+              admin: currentUser._id,
+            })
+          }
+        />
+        <Input
+          placeholder={'avatar url'}
+          value={newRoom.avatar}
+          onChange={(e) =>
+            setNewRoom({ ...newRoom, roomAvatar: e.target.value })
+          }
+        />
+        <Button onClick={createChat}>create room</Button>
+      </div>
 
       <div className="setting__field">
-        <span>{userName}</span>
+        <span>{newUserName}</span>
         <FaEdit onClick={() => setToggleEdit(true)} />
       </div>
       {toggleEdit && (
         <div className="setting__input">
           <Input
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            value={newUserName}
+            onChange={(e) => setNewUserName(e.target.value)}
             placeholder="name"
           />
           <div className="setting__input__btns">

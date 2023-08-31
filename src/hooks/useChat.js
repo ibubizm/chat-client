@@ -1,19 +1,24 @@
 import { SERVER_URI } from '../constatnts'
 import { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { io } from 'socket.io-client'
 
 export default function useChat() {
   const socket = useRef(null)
-  const roomId = localStorage.getItem('roomId')
-  const userName = localStorage.getItem('userName')
-  const avatar = localStorage.getItem('avatar')
 
-  const [user, setUser] = useState({
-    roomId: roomId,
-    userName: userName,
-    avatar: avatar,
-    roomAvatar: 'https://avatars.githubusercontent.com/u/66380357?v=4',
-  })
+  const user = useSelector(({ toolkit }) => toolkit.user)
+  const currentRoom = useSelector(({ room }) => room.currentRoom)
+
+  // const roomId = localStorage.getItem('roomId')
+  // const userName = localStorage.getItem('userName')
+  // const avatar = localStorage.getItem('avatar')
+
+  // const [user, setUser] = useState({
+  //   roomId: roomId,
+  //   userName: userName,
+  //   avatar: avatar,
+  //   roomAvatar: 'https://avatars.githubusercontent.com/u/66380357?v=4',
+  // })
 
   const [messages, setMessages] = useState([])
   const [rooms, setRooms] = useState([])
@@ -23,7 +28,7 @@ export default function useChat() {
     setLoading(true)
     socket.current = io(SERVER_URI, {
       query: {
-        roomId,
+        roomId: currentRoom._id,
         userName: user.userName,
       },
     })
@@ -31,7 +36,7 @@ export default function useChat() {
     socket.current.on('conect', (users) => console.log(users))
     socket.current.emit('user:add', user)
 
-    socket.current.emit('message:get', roomId)
+    socket.current.emit('message:get', currentRoom._id)
 
     socket.current.emit('room:get')
 
@@ -54,18 +59,19 @@ export default function useChat() {
     return () => {
       socket.current.disconnect()
     }
-  }, [roomId])
+  }, [currentRoom._id])
 
   const createUser = (user) => {
-    console.log(user)
     socket.current.emit('user:create', user)
   }
 
   const createRoom = (room) => {
+    console.log(room)
     socket.current.emit('rooms:create', room)
   }
 
   const sendMessage = (message) => {
+    console.log(message)
     socket.current.emit('message:add', message)
   }
 
@@ -87,7 +93,6 @@ export default function useChat() {
     sendMessage,
     rooms,
     setRooms,
-    setUser,
     user,
     createRoom,
     roomUpdate,

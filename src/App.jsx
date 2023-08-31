@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import './App.css'
-import { images } from './images'
+
 import ChatPage from './pages/ChatPage'
-import { uniqueNamesGenerator, colors, animals } from 'unique-names-generator'
+import { useDispatch } from 'react-redux'
+import { registration, auth } from './http'
 
 function App() {
+  const dispatch = useDispatch()
   useEffect(() => {
     if (!localStorage.getItem('selectedTheme')) {
       document.querySelector('body').setAttribute('data-theme', 'light')
@@ -12,17 +14,11 @@ function App() {
       const theme = localStorage.getItem('selectedTheme')
       document.querySelector('body').setAttribute('data-theme', theme)
     }
-    if (!localStorage.getItem('userName')) {
-      const randomName = uniqueNamesGenerator({
-        dictionaries: [colors, animals],
-      })
-      localStorage.setItem('userName', randomName)
-      localStorage.setItem('userId', Math.random())
-      localStorage.setItem(
-        'avatar',
-        images[Math.floor(Math.random() * images.length)]
-      )
-      // localStorage.setItem('roomId', 'mainRoom')
+    if (!localStorage.getItem('userId')) {
+      dispatch(registration())
+      localStorage.setItem('roomId', 'mainRoom')
+    } else {
+      dispatch(auth(localStorage.getItem('userId')))
     }
   }, [])
   return <ChatPage />

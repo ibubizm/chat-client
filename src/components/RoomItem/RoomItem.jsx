@@ -1,13 +1,16 @@
 import { memo } from 'react'
 import { timeFunc } from '../../halpers'
 import './RoomItem.css'
+import { useSelector } from 'react-redux'
 
 export const RoomItem = memo(({ room, handlerRoom }) => {
+  const { currentRoom } = useSelector(({ room }) => room)
+
   return (
     <div
       onClick={() => handlerRoom(room)}
       className={
-        localStorage.getItem('roomId') === room.roomId
+        currentRoom._id === room._id
           ? 'room__item room__item-active'
           : 'room__item'
       }

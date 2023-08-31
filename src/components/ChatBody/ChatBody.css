@@ -11,7 +11,7 @@
 }
 
 .context__list {
-  position: fixed;
+  position: inherit;
   border-radius: 7px;
   list-style: none;
   border: 1px solid var(--bg-active);

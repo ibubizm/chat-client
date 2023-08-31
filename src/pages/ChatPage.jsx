@@ -4,8 +4,10 @@ import { ChatBody } from '../components/ChatBody/ChatBody'
 import { ChatFooter } from '../components/ChatFooter/ChatFooter'
 import { ChatHeader } from '../components/ChatHeader/ChatHeader'
 import useChat from '../hooks/useChat'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Loader } from '../components/Loader/Loader'
+import { useDispatch, useSelector } from 'react-redux'
+import { setRoom } from '../components/redux/roomReducer'
 
 const ChatPage = () => {
   const {
@@ -17,18 +19,23 @@ const ChatPage = () => {
     removeMessage,
     editMessage,
     createUser,
+    createRoom,
   } = useChat()
   const [chatSelected, setChatSelected] = useState(false)
-  const [currentRoom, setCurrentRoom] = useState({
-    roomId: localStorage.getItem('roomId'),
-    roomAvatar: localStorage.getItem('roomAvatar'),
-  })
 
+  const dispatch = useDispatch()
+  const { currentRoom } = useSelector(({ room }) => room)
+
+  const messageEndRef = useRef()
   const handlerRoom = (room) => {
     setChatSelected(true)
-    setCurrentRoom(room)
-    localStorage.setItem('roomId', room.roomId)
-    localStorage.setItem('roomAvatar', room.roomAvatar)
+    dispatch(setRoom(room))
+  }
+
+  const scrollFunc = () => {
+    messageEndRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    })
   }
 
   return (
@@ -37,6 +44,7 @@ const ChatPage = () => {
         rooms={rooms}
         handlerRoom={handlerRoom}
         createUser={createUser}
+        createRoom={createRoom}
       />
       <div
         className={
@@ -48,16 +56,21 @@ const ChatPage = () => {
           setChatSelected={setChatSelected}
           chatSelected={chatSelected}
         />
-        {!loading && currentRoom.roomId !== null ? (
+        {!loading && chatSelected ? (
           <>
             <ChatBody
+              messageEndRef={messageEndRef}
               room={currentRoom}
               messages={messages}
               removeMessage={removeMessage}
               loading={loading}
               editMessage={editMessage}
             />
-            <ChatFooter sendMessage={sendMessage} roomUpdate={roomUpdate} />
+            <ChatFooter
+              sendMessage={sendMessage}
+              roomUpdate={roomUpdate}
+              scrollFunc={scrollFunc}
+            />
           </>
         ) : (
           <Loader />

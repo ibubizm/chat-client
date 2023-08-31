@@ -31,6 +31,10 @@
   color: var(--font-color);
 }
 
+.input::placeholder {
+  color: var(--font-color);
+}
+
 .textarea {
   width: 100%;
   min-height: 36px;
