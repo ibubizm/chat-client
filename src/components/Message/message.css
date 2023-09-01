@@ -11,7 +11,7 @@
 }
 
 .message__author__avatar {
-  margin-right: 9px;
+  margin: 0 9px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -20,6 +20,10 @@
 .message__author {
   font-size: 12px;
   color: var(--primary-color);
+}
+
+.message__author__invisible {
+  display: none;
 }
 .my {
   /* display: flex; */
@@ -39,7 +43,9 @@
 }
 .my__message {
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
+  flex-direction: row-reverse;
+  align-items: end;
 }
 
 .message__time {

@@ -1,6 +1,6 @@
 import './message.css'
 import { memo, useEffect, useState } from 'react'
-import { timeFunc } from '../../halpers'
+import { timeFunc } from '../../helpers/halpers'
 import useContextMenu from '../../hooks/useContextMenu'
 import { FaEdit } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
@@ -46,7 +46,15 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
         />
       )}
       <div className={user._id === message.userId ? 'message my' : 'message'}>
-        <span className="message__author">{message.author.userName}</span>
+        <span
+          className={
+            user._id === message.userId
+              ? 'message__author__invisible'
+              : 'message__author'
+          }
+        >
+          {message.author.userName}
+        </span>
         <span className="message__text">
           {toggleEdit ? (
             <>

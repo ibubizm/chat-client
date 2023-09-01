@@ -1,5 +1,5 @@
 .chat__sidebar {
-  height: 100vh;
+  height: 100svh;
   display: grid;
   grid-template-rows: auto 1fr;
   background-color: var(--bg-color);
@@ -43,7 +43,7 @@
 
 @media (max-width: 540px) {
   .chat__sidebar {
-    width: 100svw;
+    width: 100vw;
   }
   /* .chat__rooms {
     overflow-y: scroll;

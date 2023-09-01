@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { timeFunc } from '../../halpers'
+import { timeFunc } from '../../helpers/halpers'
 import './RoomItem.css'
 import { useSelector } from 'react-redux'
 

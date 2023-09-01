@@ -15,7 +15,7 @@
 
 @media (max-width: 540px) {
   .chat {
-    grid-template-columns: 100vw;
+    /* grid-template-columns: 100vw; */
     height: 100svh;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -33,6 +33,7 @@
   }
 
   .chat__main-selected {
+    height: 100svh;
     overflow: visible;
     right: 0;
     transition: 0.2s;
