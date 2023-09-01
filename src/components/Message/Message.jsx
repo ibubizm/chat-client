@@ -39,10 +39,14 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
         })
       }}
     >
-      {/* {message.author.avatar != undefined && (
-        <img className="st" src={getImage(message.author.avatar)} />
-      )} */}
+      {message.author.avatar && (
+        <img
+          className="message__author__avatar"
+          src={getImage(message.author.avatar)}
+        />
+      )}
       <div className={user._id === message.userId ? 'message my' : 'message'}>
+        <span className="message__author">{message.author.userName}</span>
         <span className="message__text">
           {toggleEdit ? (
             <>
@@ -90,13 +94,13 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
             <FaEdit />
             edit
           </li>
-          <li
+          {/* <li
             className="context__list__item"
             onClick={() => setToggleEdit(true)}
           >
             <FaEdit />
             replay
-          </li>
+          </li> */}
           <li
             className="context__list__item"
             onClick={() => removeMessage(message)}

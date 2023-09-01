@@ -10,11 +10,16 @@
   border-radius: 0px 16px 16px 16px;
 }
 
-.st {
+.message__author__avatar {
   margin-right: 9px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
+}
+
+.message__author {
+  font-size: 12px;
+  color: var(--primary-color);
 }
 .my {
   /* display: flex; */
