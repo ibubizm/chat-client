@@ -7,7 +7,12 @@ export const login = (userName) => async (dispatch) => {
   const { data } = await axios.get(
     SERVER_URI + '/auth/login',
     { userName },
-    { headers: { 'Content-Type': 'application/json' } }
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    }
   )
   return dispatch(setUser(data))
 }
@@ -15,7 +20,12 @@ export const auth = (userId) => async (dispatch) => {
   const { data } = await axios.post(
     SERVER_URI + '/auth/auth',
     { userId },
-    { headers: { 'Content-Type': 'application/json' } }
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    }
   )
   return dispatch(setUser(data.user))
 }
@@ -29,7 +39,12 @@ export const registration = () => async (dispatch) => {
     {
       userName: randomName,
     },
-    { headers: { 'Content-Type': 'application/json' } }
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    }
   )
   console.log(data.user._id)
   localStorage.setItem('userId', data.user._id)
