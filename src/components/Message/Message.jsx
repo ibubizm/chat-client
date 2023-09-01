@@ -39,9 +39,9 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
         })
       }}
     >
-      {message.author.avatar != undefined && (
+      {/* {message.author.avatar != undefined && (
         <img className="st" src={getImage(message.author.avatar)} />
-      )}
+      )} */}
       <div className={user._id === message.userId ? 'message my' : 'message'}>
         <span className="message__text">
           {toggleEdit ? (

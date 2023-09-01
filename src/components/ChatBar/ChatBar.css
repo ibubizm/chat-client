@@ -45,6 +45,9 @@
   .chat__sidebar {
     width: 100svw;
   }
+  .chat__rooms {
+    overflow: scroll;
+  }
 }
 
 @media (max-width: 390px) {
@@ -57,5 +60,8 @@
   }
   .room__item__message {
     font-size: 18px;
+  }
+  .chat__rooms {
+    overflow: scroll;
   }
 }
