@@ -22,10 +22,6 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
     setToggleEdit(false)
   }
 
-  // useEffect(() => {
-  //   setAva(getImage(message.author.avatar))
-  // }, [mes])
-
   return (
     <div
       key={message.messageId}
@@ -43,7 +39,7 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
         })
       }}
     >
-      {message.author.avatar && (
+      {message.author.avatar != undefined && (
         <img className="st" src={getImage(message.author.avatar)} />
       )}
       <div className={user._id === message.userId ? 'message my' : 'message'}>
