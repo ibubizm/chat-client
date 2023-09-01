@@ -43,7 +43,7 @@
 
 @media (max-width: 540px) {
   .chat__sidebar {
-    width: 100vw;
+    width: 100svw;
   }
 }
 
