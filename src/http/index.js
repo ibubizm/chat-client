@@ -9,8 +9,8 @@ export const login = (userName) => async (dispatch) => {
     { userName },
     {
       headers: {
-        'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
       },
     }
   )
@@ -22,8 +22,8 @@ export const auth = (userId) => async (dispatch) => {
     { userId },
     {
       headers: {
-        'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
       },
     }
   )
@@ -41,12 +41,12 @@ export const registration = () => async (dispatch) => {
     },
     {
       headers: {
-        'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
       },
     }
   )
-  console.log(data.user._id)
+
   localStorage.setItem('userId', data.user._id)
   return dispatch(setUser(data.user))
 }
