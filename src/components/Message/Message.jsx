@@ -83,7 +83,7 @@ export const Message = memo(({ message, removeMessage, editMessage }) => {
 
         {message.updated ? (
           <div className="message__footer">
-            <span className="message__time">chenged</span>
+            <span className="message__time">Edited</span>
             <span className="message__time">{timeFunc(message.createdAt)}</span>
           </div>
         ) : (
