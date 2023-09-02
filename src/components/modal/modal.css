@@ -43,9 +43,9 @@
   height: 30px;
 }
 
-.input {
+/* .input {
   margin-bottom: 10px;
-}
+} */
 
 @media (max-width: 390px) {
   .modal__content {

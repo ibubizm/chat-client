@@ -17,17 +17,21 @@ export const login = (userName) => async (dispatch) => {
   return dispatch(setUser(data))
 }
 export const auth = (userId) => async (dispatch) => {
-  const { data } = await axios.post(
-    SERVER_URI + '/auth/auth',
-    { userId },
-    {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-  return dispatch(setUser(data.user))
+  try {
+    const { data } = await axios.post(
+      SERVER_URI + '/auth/auth',
+      { userId },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+    return dispatch(setUser(data.user))
+  } catch (e) {
+    localStorage.removeItem('userId')
+  }
 }
 
 export const registration = () => async (dispatch) => {

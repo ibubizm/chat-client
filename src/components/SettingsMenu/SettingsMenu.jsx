@@ -49,11 +49,6 @@ export const SettingsMenu = ({ createRoom, onClose }) => {
             alt="ava"
           />
         )}
-        {/* {avatar ? (
-          <img className="avatar" src={URL.createObjectURL(avatar)} alt="" />
-        ) : (
-          <img className="avatar" src={getImage(currentUser.avatar)} alt="" />
-        )} */}
         <input
           onChange={(e) => setAvatar(e.target.files[0])}
           type="file"
@@ -64,7 +59,7 @@ export const SettingsMenu = ({ createRoom, onClose }) => {
         dark theme
         <DarkMode />
       </div>
-      <div className="setting__field">
+      <div className="setting__field createroom">
         create room
         <Input
           placeholder={'room name'}
@@ -84,7 +79,9 @@ export const SettingsMenu = ({ createRoom, onClose }) => {
             setNewRoom({ ...newRoom, roomAvatar: e.target.value })
           }
         />
-        <Button onClick={createChat}>create room</Button>
+        <Button className={'sm'} onClick={createChat}>
+          create room
+        </Button>
       </div>
 
       <div className="setting__field">

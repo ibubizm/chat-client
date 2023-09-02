@@ -7,6 +7,7 @@ export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
       {chatSelected && (
         <button className="back__btn" onClick={() => setChatSelected(false)}>
           <img src={backImg} alt="" />
+          <span>back</span>
         </button>
       )}
       {!currentRoom.roomId ? (

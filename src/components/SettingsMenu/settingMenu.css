@@ -9,10 +9,11 @@
   border-radius: 50%;
 }
 
-/* .setting__input {
+.setting__input {
   display: flex;
   align-items: center;
-} */
+  gap: 10px;
+}
 
 .setting__field {
   display: flex;
