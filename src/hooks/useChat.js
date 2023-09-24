@@ -1,13 +1,15 @@
 import { SERVER_URI } from '../constatnts'
 import { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { io } from 'socket.io-client'
+import { getUsersRooms } from '../http'
 
 export default function useChat() {
   const socket = useRef(null)
+  const dispatch = useDispatch()
 
-  const user = useSelector(({ toolkit }) => toolkit.user)
-  const currentRoom = useSelector(({ room }) => room.currentRoom)
+  const user = useSelector(({ userReducer }) => userReducer.user)
+  const currentRoom = useSelector(({ roomReducer }) => roomReducer.currentRoom)
 
   // const roomId = localStorage.getItem('roomId')
   // const userName = localStorage.getItem('userName')
@@ -28,56 +30,60 @@ export default function useChat() {
     setLoading(true)
     socket.current = io(SERVER_URI, {
       query: {
+        userId: user._id,
         roomId: currentRoom._id,
         userName: user.userName,
       },
     })
 
-    socket.current.on('conect', (users) => console.log(users))
-    socket.current.emit('user:add', user)
+    // socket.current.on('change', (change) => {
+    //   console.log(change, 'changes')
+    //   // dispatch(getUsersRooms(user._id))
+    // })
+
+    // socket.current.on('conect', (users) => console.log(users))
+    // socket.current.emit('user:add', user)
+
+    // socket.current.emit('room:get', user._id)
+
+    // socket.current.on('room_list:update', (rooms) => {
+    //   console.log(rooms, 'upd')
+    //   setRooms(rooms)
+    // })
 
     socket.current.emit('message:get', currentRoom._id)
 
-    socket.current.emit('room:get')
-
-    socket.current.on('room_list:update', (rooms) => {
-      setRooms(rooms)
-    })
-
-    // socket.current.on('user:created', (user) => {
-    //   console.log(user, '-------user')
-    // })
     socket.current.on('message_list:update', (messages) => {
       setMessages(messages)
       setLoading(false)
+      // dispatch(getUsersRooms(user._id))
     })
 
-    socket.current.on('rooms:all', (rooms) => {
-      setRooms(rooms)
-    })
+    // socket.current.on('rooms:all', (rooms) => {
+    //   setRooms(rooms)
+    // })
 
     return () => {
       socket.current.disconnect()
     }
   }, [currentRoom._id])
 
-  const createUser = (user) => {
-    socket.current.emit('user:create', user)
-  }
+  // const createUser = (user) => {
+  //   socket.current.emit('user:create', user)
+  // }
 
-  const createRoom = (room) => {
-    console.log(room)
-    socket.current.emit('rooms:create', room)
-  }
+  // const createRoom = (room) => {
+  //   socket.current.emit('rooms:create', room)
+  // }
 
   const sendMessage = (message) => {
-    console.log(message)
     socket.current.emit('message:add', message)
+    // dispatch(getUsersRooms(message.userId))
   }
 
-  const roomUpdate = (mes) => {
-    socket.current.emit('room:update', mes)
-  }
+  // const roomUpdate = (mes) => {
+  //   socket.current.emit('room:update', mes)
+  // }
 
   const removeMessage = (message) => {
     socket.current.emit('message:remove', message)
@@ -91,13 +97,13 @@ export default function useChat() {
     loading,
     messages,
     sendMessage,
-    rooms,
-    setRooms,
-    user,
-    createRoom,
-    roomUpdate,
     removeMessage,
     editMessage,
-    createUser,
+    // rooms,
+    // setRooms,
+    // user,
+    // createRoom,
+    // roomUpdate,
+    // createUser,
   }
 }

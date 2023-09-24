@@ -61,3 +61,19 @@
   display: flex;
   gap: 5px;
 }
+
+.reply__block {
+  background: var(--bg-color);
+  border-radius: 16px;
+  padding: 10px;
+  display: grid;
+  gap: 5px;
+}
+
+.reply__userName {
+  color: var(--primary-color);
+}
+
+.reply__message {
+  color: var(--font-color);
+}

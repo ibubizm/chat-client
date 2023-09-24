@@ -21,10 +21,13 @@ const ChatPage = () => {
     createUser,
     createRoom,
   } = useChat()
+
   const [chatSelected, setChatSelected] = useState(false)
+  const [reply, setReply] = useState({})
 
   const dispatch = useDispatch()
-  const { currentRoom } = useSelector(({ room }) => room)
+
+  const { currentRoom } = useSelector(({ roomReducer }) => roomReducer)
 
   const messageEndRef = useRef()
   const handlerRoom = (room) => {
@@ -36,6 +39,15 @@ const ChatPage = () => {
     messageEndRef.current?.scrollIntoView({
       behavior: 'smooth',
     })
+  }
+
+  const replyFunc = (message) => {
+    console.log(message)
+    setReply(message)
+  }
+
+  const closeReply = () => {
+    setReply({})
   }
 
   return (
@@ -59,6 +71,9 @@ const ChatPage = () => {
         {!loading && chatSelected ? (
           <>
             <ChatBody
+              reply={reply}
+              closeReply={closeReply}
+              replyFunc={replyFunc}
               messageEndRef={messageEndRef}
               room={currentRoom}
               messages={messages}
@@ -66,7 +81,10 @@ const ChatPage = () => {
               loading={loading}
               editMessage={editMessage}
             />
+
             <ChatFooter
+              reply={reply}
+              closeReply={closeReply}
               sendMessage={sendMessage}
               roomUpdate={roomUpdate}
               scrollFunc={scrollFunc}

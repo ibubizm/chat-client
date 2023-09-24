@@ -41,6 +41,12 @@
   overflow-y: scroll;
 }
 
+.chat__rooms__title {
+  color: var(--font-color);
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
 @media (max-width: 540px) {
   .chat__sidebar {
     width: 100vw;

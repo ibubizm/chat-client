@@ -3,8 +3,8 @@ import userReducer from './userReducer'
 import roomReducer from './roomReducer'
 
 const rootReducer = combineReducers({
-  toolkit: userReducer,
-  room: roomReducer,
+  userReducer,
+  roomReducer,
 })
 
 export const store = configureStore({

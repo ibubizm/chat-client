@@ -3,7 +3,7 @@ import './App.css'
 
 import ChatPage from './pages/ChatPage'
 import { useDispatch } from 'react-redux'
-import { registration, auth } from './http'
+import { registration, auth, getUsersRooms } from './http'
 
 function App() {
   const dispatch = useDispatch()
@@ -19,8 +19,10 @@ function App() {
       localStorage.setItem('roomId', 'mainRoom')
     } else {
       dispatch(auth(localStorage.getItem('userId')))
+      dispatch(getUsersRooms(localStorage.getItem('userId')))
     }
   }, [])
+
   return <ChatPage />
 }
 

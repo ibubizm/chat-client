@@ -2,6 +2,41 @@ import axios from 'axios'
 import { SERVER_URI } from '../constatnts'
 import { setUser } from '../components/redux/userReducer'
 import { uniqueNamesGenerator, colors, animals } from 'unique-names-generator'
+import {
+  addRoomToSubscribe,
+  removeRoomToSubscribe,
+  setRooms,
+  updateRooms,
+} from '../components/redux/roomReducer'
+
+export const getUsersRooms = (userId) => async (dispatch) => {
+  const { data } = await axios.post(
+    SERVER_URI + '/rooms/getRooms',
+    { userId },
+    {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+  return dispatch(setRooms(data.rooms))
+}
+
+export const updateUsersRooms = (roomId, lastMessage) => async (dispatch) => {
+  console.log('upd')
+  const { data } = await axios.post(
+    SERVER_URI + '/rooms/updateRooms',
+    { roomId, lastMessage },
+    {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+  return dispatch(updateRooms(data.rooms))
+}
 
 export const login = (userName) => async (dispatch) => {
   const { data } = await axios.get(
@@ -14,6 +49,7 @@ export const login = (userName) => async (dispatch) => {
       },
     }
   )
+
   return dispatch(setUser(data))
 }
 export const auth = (userId) => async (dispatch) => {
@@ -57,6 +93,34 @@ export const registration = () => async (dispatch) => {
 
 export const updateUser = (user) => async (dispatch) => {
   const { data } = await axios.post(SERVER_URI + '/auth/updateuser', user)
-
   return dispatch(setUser(data.user))
+}
+
+export const createChat = (room) => async (dispatch) => {
+  const { data } = await axios.post(SERVER_URI + '/rooms/createRoom', room)
+  return dispatch(addRoomToSubscribe(data.room))
+}
+
+export const subscribe = (userId, roomId) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(SERVER_URI + '/rooms/subscribe', {
+      userId,
+      roomId,
+    })
+    dispatch(addRoomToSubscribe(data.room))
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const unsubscribe = (userId, roomId) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(SERVER_URI + '/rooms/unsubscribe', {
+      userId,
+      roomId,
+    })
+    dispatch(removeRoomToSubscribe(data.room))
+  } catch (e) {
+    console.log(e)
+  }
 }

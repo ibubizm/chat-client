@@ -1,13 +1,23 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import sendIcon from './send.svg'
 import './ChatFooter.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUsersRooms, updateUsersRooms } from '../../http'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 
-export const ChatFooter = ({ sendMessage, roomUpdate, scrollFunc }) => {
-  const user = useSelector(({ toolkit }) => toolkit.user)
-  const room = useSelector(({ room }) => room.currentRoom)
+export const ChatFooter = ({
+  sendMessage,
+  roomUpdate,
+  scrollFunc,
+  reply,
+  closeReply,
+}) => {
+  const user = useSelector(({ userReducer }) => userReducer.user)
+  const room = useSelector(({ roomReducer }) => roomReducer.currentRoom)
   const [message, setMessage] = useState('')
   const ref = useRef(null)
+
+  const dispatch = useDispatch()
 
   const onKey = (e) => {
     ref.current.focus()
@@ -34,20 +44,31 @@ export const ChatFooter = ({ sendMessage, roomUpdate, scrollFunc }) => {
         messageId: Math.random(),
         userId: user._id,
         text: message,
+        replyId: reply._id,
       }
-      if (message !== '') {
-        scrollFunc()
-        sendMessage(mes)
-        roomUpdate(mes)
-      } else {
-        alert('empty')
-      }
-      setMessage('')
+      scrollFunc()
+      sendMessage(mes)
+      dispatch(updateUsersRooms(room._id, message))
+      closeReply()
+      // roomUpdate(mes)
+    } else {
+      alert('empty')
     }
+    setMessage('')
   }
+
+  // useEffect(() => {
+  //   dispatch(getUsersRooms(user._id))
+  // }, [sendMessage])
 
   return (
     <div className="chat__footer">
+      {reply.text && (
+        <div className="reply">
+          <span className="reply__text">{reply.text}</span>
+          <AiOutlineCloseCircle onClick={closeReply} />
+        </div>
+      )}
       <form
         onSubmit={(e) => {
           e.preventDefault()

@@ -5,18 +5,19 @@ import { FaEdit } from 'react-icons/fa'
 import { DarkMode } from '../DarkMode/DarkMode'
 import { Button } from '../button/Button'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUser } from '../../http'
+import { createChat as newChat, updateUser } from '../../http'
 import { getImage } from '../../helpers/imageHalper'
+import { addRoomToSubscribe } from '../redux/roomReducer'
 
 export const SettingsMenu = ({ createRoom, onClose }) => {
-  const currentUser = useSelector(({ toolkit }) => toolkit.user)
+  const currentUser = useSelector(({ userReducer }) => userReducer.user)
   const [newUserName, setNewUserName] = useState(currentUser.userName)
   const [toggleEdit, setToggleEdit] = useState(false)
   const [avatar, setAvatar] = useState(currentUser.avatar)
   const [newRoom, setNewRoom] = useState({
     roomId: '',
     roomAvatar: '',
-    admin: '',
+    admin: currentUser._id,
   })
 
   const dispatch = useDispatch()
@@ -36,7 +37,9 @@ export const SettingsMenu = ({ createRoom, onClose }) => {
   }
 
   const createChat = () => {
-    createRoom(newRoom)
+    dispatch(newChat(newRoom))
+    // newChat(newRoom)
+    // createRoom(newRoom)
   }
 
   return (

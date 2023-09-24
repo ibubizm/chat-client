@@ -4,7 +4,7 @@ import './RoomItem.css'
 import { useSelector } from 'react-redux'
 
 export const RoomItem = memo(({ room, handlerRoom }) => {
-  const { currentRoom } = useSelector(({ room }) => room)
+  const { currentRoom } = useSelector(({ roomReducer }) => roomReducer)
 
   return (
     <div
