@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { subscribe, unsubscribe } from '../../http'
 import './ChatHeader.css'
-import backImg from './back.svg'
+import { IoIosArrowBack } from 'react-icons/io'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
@@ -23,13 +23,13 @@ export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
     } else {
       setSub(false)
     }
-  }, [currentRoom])
+  }, [currentRoom, user._id, subscribeToggle, unSubscribeToggle])
 
   return (
     <div className="chat__header">
       {chatSelected && (
         <button className="back__btn" onClick={() => setChatSelected(false)}>
-          <img src={backImg} alt="" />
+          <IoIosArrowBack />
           <span>back</span>
         </button>
       )}

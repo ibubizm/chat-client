@@ -10,7 +10,7 @@ import axios from 'axios'
 import { SERVER_URI } from '../../constatnts'
 
 export const ChatBar = ({ rooms, handlerRoom, createUser, createRoom }) => {
-  const { user } = useSelector(({ userReducer }) => userReducer)
+  // const { user } = useSelector(({ userReducer }) => userReducer)
   const { rooms: usersRooms } = useSelector(({ roomReducer }) => roomReducer)
   const [input, setInput] = useState('')
   const [modal, setModal] = useState(false)
@@ -71,7 +71,7 @@ export const ChatBar = ({ rooms, handlerRoom, createUser, createRoom }) => {
             )}
           </div>
         )}
-        {user.subscriptions ? (
+        {usersRooms.length !== 0 ? (
           <>
             {input.length !== 0 && (
               <span className="chat__rooms__title">my rooms</span>
@@ -87,7 +87,7 @@ export const ChatBar = ({ rooms, handlerRoom, createUser, createRoom }) => {
               ))}
           </>
         ) : (
-          <div className="chat__empty">Пусто...</div>
+          <div className="chat__empty">create a new chat or find current</div>
         )}
       </div>
 
