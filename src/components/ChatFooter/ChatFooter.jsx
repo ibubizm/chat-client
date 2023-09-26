@@ -33,8 +33,8 @@ export const ChatFooter = ({
     }
     if (!e.shiftKey && e.key === 'Enter') {
       e.preventDefault()
-      handleSendMessage()
-      // submitFunc()
+      // handleSendMessage()
+      submitFunc()
     }
 
     if (e.key === 'Backspace') {
@@ -62,19 +62,13 @@ export const ChatFooter = ({
     setInputValue('')
   }
 
-  const submitFunc = (e) => {
-    e.preventDefault()
+  const submitFunc = () => {
     if (toggleEdit.text) {
       onEdit(toggleEdit)
     } else {
       handleSendMessage()
     }
   }
-
-  // useEffect(() => {
-  //   dispatch(getUsersRooms(user._id))
-  // }, [sendMessage])
-
   return (
     <div className="chat__footer">
       {reply.text && (
@@ -104,24 +98,12 @@ export const ChatFooter = ({
         />
 
         {!toggleEdit.text ? (
-          <button
-            className="button__send"
-            // onClick={(e) => {
-            //   e.preventDefault()
-            //   handleSendMessage()
-            // }}
-          >
+          <button className="button__send">
             <img className="send__icon" src={sendIcon} alt="" />
           </button>
         ) : (
-          <button
-            className="button__send"
-            // onClick={(e) => {
-            //   e.preventDefault()
-            //   onEdit(toggleEdit)
-            // }}
-          >
-            <GrEdit />
+          <button className="button__send">
+            <GrEdit className="send__icon" />
           </button>
         )}
       </form>

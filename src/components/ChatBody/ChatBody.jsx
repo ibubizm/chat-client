@@ -8,7 +8,7 @@ export const ChatBody = ({
   loading,
   removeMessage,
   editMessage,
-  messageEndRef,
+  // messageEndRef,
   replyFunc,
   reply,
   closeReply,
@@ -17,7 +17,7 @@ export const ChatBody = ({
   const messagesEndRef = useRef(null)
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && messages) {
       messagesEndRef.current?.scrollIntoView({
         behavior: 'smooth',
       })

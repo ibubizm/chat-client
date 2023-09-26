@@ -4,7 +4,7 @@ import { ChatBody } from '../components/ChatBody/ChatBody'
 import { ChatFooter } from '../components/ChatFooter/ChatFooter'
 import { ChatHeader } from '../components/ChatHeader/ChatHeader'
 import useChat from '../hooks/useChat'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Loader } from '../components/Loader/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { setRoom } from '../components/redux/roomReducer'
@@ -33,19 +33,21 @@ const ChatPage = () => {
   const { currentRoom } = useSelector(({ roomReducer }) => roomReducer)
 
   const messageEndRef = useRef()
+
   const handlerRoom = (room) => {
     setChatSelected(true)
     dispatch(setRoom(room))
   }
 
   const scrollFunc = () => {
-    messageEndRef.current.scrollIntoView({
-      behavior: 'smooth',
+    messageEndRef.current?.scrollIntoView({
+      // behavior: 'smooth',
     })
   }
 
-  const replyFunc = (message) => {
+  const replyFunc = (message, messageRef) => {
     setReply(message)
+    console.log(messageRef)
   }
 
   const closeReply = () => {
@@ -64,9 +66,9 @@ const ChatPage = () => {
     setInputValue('')
   }
 
-  // useEffect(() => {
-  //   scrollFunc()
-  // }, [messages])
+  useEffect(() => {
+    scrollFunc()
+  }, [messages])
 
   return (
     <div className="chat">
@@ -93,14 +95,13 @@ const ChatPage = () => {
               selectEditMessage={selectEditMessage}
               closeReply={closeReply}
               replyFunc={replyFunc}
-              // messageEndRef={messageEndRef}
+              messageEndRef={messageEndRef}
               room={currentRoom}
               messages={messages}
               removeMessage={removeMessage}
               loading={loading}
               editMessage={editMessage}
             />
-            <span ref={messageEndRef}></span>
             <ChatFooter
               toggleEdit={toggleEdit}
               onEdit={onEdit}

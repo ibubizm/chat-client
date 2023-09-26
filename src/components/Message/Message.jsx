@@ -1,5 +1,5 @@
 import './message.css'
-import { memo } from 'react'
+import { memo, useRef } from 'react'
 import { timeFunc } from '../../helpers/halpers'
 import useContextMenu from '../../hooks/useContextMenu'
 import { useSelector } from 'react-redux'
@@ -11,8 +11,11 @@ export const Message = memo(
     const user = useSelector(({ userReducer }) => userReducer.user)
     const { clicked, setClicked, points, setPoints } = useContextMenu()
 
+    const messageRef = useRef()
+
     return (
       <div
+        ref={messageRef}
         key={message.messageId}
         className={
           user._id === message.userId
@@ -59,6 +62,7 @@ export const Message = memo(
         </div>
         {clicked && (
           <ContextMenu
+            messageRef={messageRef}
             message={message}
             removeMessage={removeMessage}
             replyFunc={replyFunc}

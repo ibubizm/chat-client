@@ -9,6 +9,7 @@ export const ContextMenu = ({
   replyFunc,
   points,
   setToggleEdit,
+  messageRef,
 }) => {
   return (
     <ul
@@ -22,11 +23,10 @@ export const ContextMenu = ({
         <FaEdit />
         edit
       </li>
-      {/* <li className="context__list__item" onClick={() => setToggleEdit(true)}>
-        <FaEdit />
-        edit
-      </li> */}
-      <li className="context__list__item" onClick={() => replyFunc(message)}>
+      <li
+        className="context__list__item"
+        onClick={() => replyFunc(message, messageRef)}
+      >
         <BsReplyFill />
         replay
       </li>

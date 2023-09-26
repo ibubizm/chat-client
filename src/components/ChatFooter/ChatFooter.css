@@ -20,6 +20,15 @@
   color: var(--secondery-color);
 }
 
+.send__icon {
+  height: 22px;
+  width: 22px;
+  fill: red;
+}
+
+.send__icon > path {
+  stroke: rgb(103, 173, 131);
+}
 @media (max-width: 390px) {
   .form {
     gap: 10px;
