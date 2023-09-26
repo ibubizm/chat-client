@@ -2,9 +2,10 @@ import { memo, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { ContextMenu } from '../ContextMenu/ContextMenu'
 import useContextMenu from '../../hooks/useContextMenu'
+import { timeFunc } from '../../helpers/halpers'
 
 export const ReplyMessage = memo(
-  ({ message, messages, removeMessage, editMessage, replyFunc }) => {
+  ({ message, messages, removeMessage, replyFunc, selectEditMessage }) => {
     const [rep, setRep] = useState({})
     const [authorRep, setAuthorRep] = useState({})
     const user = useSelector(({ userReducer }) => userReducer.user)
@@ -50,6 +51,16 @@ export const ReplyMessage = memo(
             <span className="reply__message">{rep.text}</span>
           </div>
           {rep ? <div>{message.text}</div> : 'message deleted'}
+          {message.updated ? (
+            <div className="message__footer">
+              <span className="message__time">Edited</span>
+              <span className="message__time">
+                {timeFunc(message.createdAt)}
+              </span>
+            </div>
+          ) : (
+            <span className="message__time">{timeFunc(message.createdAt)}</span>
+          )}
         </div>
         {clicked && (
           <ContextMenu
@@ -57,6 +68,7 @@ export const ReplyMessage = memo(
             removeMessage={removeMessage}
             replyFunc={replyFunc}
             points={points}
+            setToggleEdit={selectEditMessage}
           />
         )}
       </div>

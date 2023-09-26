@@ -1,27 +1,15 @@
 import './message.css'
-import { memo, useEffect, useState } from 'react'
+import { memo } from 'react'
 import { timeFunc } from '../../helpers/halpers'
 import useContextMenu from '../../hooks/useContextMenu'
-import { FaEdit } from 'react-icons/fa'
-import { BsReplyFill } from 'react-icons/bs'
-import { MdDelete } from 'react-icons/md'
-import { Input } from '../input/input'
-import { Button } from '../button/Button'
 import { useSelector } from 'react-redux'
 import { getImage } from '../../helpers/imageHalper'
+import { ContextMenu } from '../ContextMenu/ContextMenu'
 
 export const Message = memo(
-  ({ message, removeMessage, editMessage, replyFunc }) => {
+  ({ message, removeMessage, replyFunc, selectEditMessage }) => {
     const user = useSelector(({ userReducer }) => userReducer.user)
-    const [toggleEdit, setToggleEdit] = useState(false)
-    const [editValue, setEditValue] = useState(message.text)
-
     const { clicked, setClicked, points, setPoints } = useContextMenu()
-
-    const onEdit = () => {
-      editMessage({ ...message, text: editValue })
-      setToggleEdit(false)
-    }
 
     return (
       <div
@@ -56,31 +44,7 @@ export const Message = memo(
           >
             {message.author.userName}
           </span>
-          <span className="message__text">
-            {toggleEdit ? (
-              <>
-                <Input
-                  type="text"
-                  value={editValue}
-                  onChange={(e) => setEditValue(e.target.value)}
-                />
-                <div className="message__edit__btn">
-                  <Button
-                    className={'sm'}
-                    color={'cancel'}
-                    onClick={() => setToggleEdit(false)}
-                  >
-                    cancel
-                  </Button>
-                  <Button className={'sm'} color={'access'} onClick={onEdit}>
-                    edit
-                  </Button>
-                </div>
-              </>
-            ) : (
-              message.text
-            )}
-          </span>
+          <span className="message__text">{message.text}</span>
 
           {message.updated ? (
             <div className="message__footer">
@@ -94,32 +58,13 @@ export const Message = memo(
           )}
         </div>
         {clicked && (
-          <ul
-            className="context__list"
-            style={{ top: points.y + 'px', left: points.x + 'px' }}
-          >
-            <li
-              className="context__list__item"
-              onClick={() => setToggleEdit(true)}
-            >
-              <FaEdit />
-              edit
-            </li>
-            <li
-              className="context__list__item"
-              onClick={() => replyFunc(message)}
-            >
-              <BsReplyFill />
-              replay
-            </li>
-            <li
-              className="context__list__item"
-              onClick={() => removeMessage(message)}
-            >
-              <MdDelete />
-              delete
-            </li>
-          </ul>
+          <ContextMenu
+            message={message}
+            removeMessage={removeMessage}
+            replyFunc={replyFunc}
+            points={points}
+            setToggleEdit={selectEditMessage}
+          />
         )}
       </div>
     )

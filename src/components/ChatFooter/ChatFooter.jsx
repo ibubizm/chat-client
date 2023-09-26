@@ -4,6 +4,7 @@ import './ChatFooter.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsersRooms, updateUsersRooms } from '../../http'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { GrEdit } from 'react-icons/gr'
 
 export const ChatFooter = ({
   sendMessage,
@@ -11,10 +12,14 @@ export const ChatFooter = ({
   scrollFunc,
   reply,
   closeReply,
+  inputValue,
+  setInputValue,
+  toggleEdit,
+  onEdit,
 }) => {
   const user = useSelector(({ userReducer }) => userReducer.user)
   const room = useSelector(({ roomReducer }) => roomReducer.currentRoom)
-  const [message, setMessage] = useState('')
+
   const ref = useRef(null)
 
   const dispatch = useDispatch()
@@ -29,6 +34,7 @@ export const ChatFooter = ({
     if (!e.shiftKey && e.key === 'Enter') {
       e.preventDefault()
       handleSendMessage()
+      // submitFunc()
     }
 
     if (e.key === 'Backspace') {
@@ -37,24 +43,32 @@ export const ChatFooter = ({
   }
 
   const handleSendMessage = () => {
-    if (message !== '') {
+    if (inputValue !== '') {
       const mes = {
         author: user._id,
         roomId: room._id,
         messageId: Math.random(),
         userId: user._id,
-        text: message,
+        text: inputValue,
         replyId: reply._id,
       }
       scrollFunc()
       sendMessage(mes)
-      dispatch(updateUsersRooms(room._id, message))
+      dispatch(updateUsersRooms(room._id, inputValue))
       closeReply()
-      // roomUpdate(mes)
     } else {
       alert('empty')
     }
-    setMessage('')
+    setInputValue('')
+  }
+
+  const submitFunc = (e) => {
+    e.preventDefault()
+    if (toggleEdit.text) {
+      onEdit(toggleEdit)
+    } else {
+      handleSendMessage()
+    }
   }
 
   // useEffect(() => {
@@ -69,28 +83,47 @@ export const ChatFooter = ({
           <AiOutlineCloseCircle onClick={closeReply} />
         </div>
       )}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          handleSendMessage()
-        }}
-        className="form"
-      >
+      {toggleEdit.text && (
+        <div className="reply">
+          <span className="reply__text">{toggleEdit.text}</span>
+          <AiOutlineCloseCircle onClick={closeReply} />
+        </div>
+      )}
+      <form className="form" onSubmit={submitFunc}>
         <textarea
           onChange={(e) => {
-            setMessage(e.target.value)
+            setInputValue(e.target.value)
             ref.current.focus()
           }}
           className="textarea"
           ref={ref}
           type="text"
           placeholder="Введите сообщение"
-          value={message}
+          value={inputValue}
           onKeyDown={onKey}
         />
-        <button className="button__send">
-          <img className="send__icon" src={sendIcon} alt="" />
-        </button>
+
+        {!toggleEdit.text ? (
+          <button
+            className="button__send"
+            // onClick={(e) => {
+            //   e.preventDefault()
+            //   handleSendMessage()
+            // }}
+          >
+            <img className="send__icon" src={sendIcon} alt="" />
+          </button>
+        ) : (
+          <button
+            className="button__send"
+            // onClick={(e) => {
+            //   e.preventDefault()
+            //   onEdit(toggleEdit)
+            // }}
+          >
+            <GrEdit />
+          </button>
+        )}
       </form>
     </div>
   )

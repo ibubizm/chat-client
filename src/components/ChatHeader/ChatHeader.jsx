@@ -23,7 +23,7 @@ export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
     } else {
       setSub(false)
     }
-  }, [currentRoom, user._id, subscribeToggle, unSubscribeToggle])
+  }, [currentRoom, user._id])
 
   return (
     <div className="chat__header">

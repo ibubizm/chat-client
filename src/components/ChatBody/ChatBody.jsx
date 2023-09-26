@@ -12,6 +12,7 @@ export const ChatBody = ({
   replyFunc,
   reply,
   closeReply,
+  selectEditMessage,
 }) => {
   const messagesEndRef = useRef(null)
 
@@ -35,6 +36,7 @@ export const ChatBody = ({
                 removeMessage={removeMessage}
                 editMessage={editMessage}
                 replyFunc={replyFunc}
+                selectEditMessage={selectEditMessage}
               />
             ) : (
               <ReplyMessage
@@ -44,6 +46,7 @@ export const ChatBody = ({
                 editMessage={editMessage}
                 message={message}
                 messages={messages}
+                selectEditMessage={selectEditMessage}
               />
               // messages.find((mes) => mes._id == message.replyId)
               // <div key={message._id}>

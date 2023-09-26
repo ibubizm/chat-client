@@ -4,7 +4,7 @@ import { ChatBody } from '../components/ChatBody/ChatBody'
 import { ChatFooter } from '../components/ChatFooter/ChatFooter'
 import { ChatHeader } from '../components/ChatHeader/ChatHeader'
 import useChat from '../hooks/useChat'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Loader } from '../components/Loader/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { setRoom } from '../components/redux/roomReducer'
@@ -25,6 +25,9 @@ const ChatPage = () => {
   const [chatSelected, setChatSelected] = useState(false)
   const [reply, setReply] = useState({})
 
+  const [toggleEdit, setToggleEdit] = useState({})
+  const [inputValue, setInputValue] = useState('')
+
   const dispatch = useDispatch()
 
   const { currentRoom } = useSelector(({ roomReducer }) => roomReducer)
@@ -36,19 +39,34 @@ const ChatPage = () => {
   }
 
   const scrollFunc = () => {
-    messageEndRef.current?.scrollIntoView({
+    messageEndRef.current.scrollIntoView({
       behavior: 'smooth',
     })
   }
 
   const replyFunc = (message) => {
-    console.log(message)
     setReply(message)
   }
 
   const closeReply = () => {
     setReply({})
+    setToggleEdit({})
   }
+
+  const selectEditMessage = (message) => {
+    setInputValue(message.text)
+    setToggleEdit(message)
+  }
+
+  const onEdit = (message) => {
+    editMessage({ ...message, text: inputValue })
+    setToggleEdit({})
+    setInputValue('')
+  }
+
+  // useEffect(() => {
+  //   scrollFunc()
+  // }, [messages])
 
   return (
     <div className="chat">
@@ -72,17 +90,22 @@ const ChatPage = () => {
           <>
             <ChatBody
               reply={reply}
+              selectEditMessage={selectEditMessage}
               closeReply={closeReply}
               replyFunc={replyFunc}
-              messageEndRef={messageEndRef}
+              // messageEndRef={messageEndRef}
               room={currentRoom}
               messages={messages}
               removeMessage={removeMessage}
               loading={loading}
               editMessage={editMessage}
             />
-
+            <span ref={messageEndRef}></span>
             <ChatFooter
+              toggleEdit={toggleEdit}
+              onEdit={onEdit}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
               reply={reply}
               closeReply={closeReply}
               sendMessage={sendMessage}
