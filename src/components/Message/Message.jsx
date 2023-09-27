@@ -10,9 +10,7 @@ export const Message = memo(
   ({ message, removeMessage, replyFunc, selectEditMessage }) => {
     const user = useSelector(({ userReducer }) => userReducer.user)
     const { clicked, setClicked, points, setPoints } = useContextMenu()
-
-    const messageRef = useRef()
-
+    const messageRef = useRef(null)
     return (
       <div
         ref={messageRef}
@@ -62,7 +60,6 @@ export const Message = memo(
         </div>
         {clicked && (
           <ContextMenu
-            messageRef={messageRef}
             message={message}
             removeMessage={removeMessage}
             replyFunc={replyFunc}

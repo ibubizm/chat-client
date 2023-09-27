@@ -62,7 +62,8 @@ export const ChatFooter = ({
     setInputValue('')
   }
 
-  const submitFunc = () => {
+  const submitFunc = (e) => {
+    e.preventDefault()
     if (toggleEdit.text) {
       onEdit(toggleEdit)
     } else {

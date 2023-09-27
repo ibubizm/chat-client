@@ -5,7 +5,15 @@ import useContextMenu from '../../hooks/useContextMenu'
 import { timeFunc } from '../../helpers/halpers'
 
 export const ReplyMessage = memo(
-  ({ message, messages, removeMessage, replyFunc, selectEditMessage }) => {
+  ({
+    message,
+    messages,
+    removeMessage,
+    replyFunc,
+    selectEditMessage,
+    // scrollToMessage,
+    // messageRef,
+  }) => {
     const [rep, setRep] = useState({})
     const [authorRep, setAuthorRep] = useState({})
     const user = useSelector(({ userReducer }) => userReducer.user)
@@ -20,8 +28,10 @@ export const ReplyMessage = memo(
         removeMessage(message)
       }
     }, [])
+
     return (
       <div
+        // onClick={() => scrollToMessage(messageRef)}
         className={
           user._id === message.userId
             ? 'message__block my__message'

@@ -44,6 +44,12 @@ const ChatPage = () => {
       // behavior: 'smooth',
     })
   }
+  const scrollToMessage = (messageRef) => {
+    console.log(messageRef)
+    messageRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    })
+  }
 
   const replyFunc = (message, messageRef) => {
     setReply(message)
@@ -91,6 +97,7 @@ const ChatPage = () => {
         {!loading && chatSelected ? (
           <>
             <ChatBody
+              scrollToMessage={scrollToMessage}
               reply={reply}
               selectEditMessage={selectEditMessage}
               closeReply={closeReply}

@@ -8,21 +8,20 @@ export const ChatBody = ({
   loading,
   removeMessage,
   editMessage,
-  // messageEndRef,
+  scrollToMessage,
   replyFunc,
-  reply,
-  closeReply,
   selectEditMessage,
 }) => {
   const messagesEndRef = useRef(null)
+  // const messageRef = useRef(null)
 
   useEffect(() => {
-    if (!loading && messages) {
+    if (!loading && messagesEndRef) {
       messagesEndRef.current?.scrollIntoView({
         behavior: 'smooth',
       })
     }
-  }, [messages])
+  }, [messagesEndRef])
 
   return (
     <>
@@ -32,6 +31,7 @@ export const ChatBody = ({
             !message.replyId ? (
               <Message
                 key={message.text + index}
+                // messageRef={messageRef}
                 message={message}
                 removeMessage={removeMessage}
                 editMessage={editMessage}
@@ -40,6 +40,8 @@ export const ChatBody = ({
               />
             ) : (
               <ReplyMessage
+                // messageRef={messageRef}
+                scrollToMessage={scrollToMessage}
                 key={message._id}
                 replyFunc={replyFunc}
                 removeMessage={removeMessage}
@@ -48,17 +50,6 @@ export const ChatBody = ({
                 messages={messages}
                 selectEditMessage={selectEditMessage}
               />
-              // messages.find((mes) => mes._id == message.replyId)
-              // <div key={message._id}>
-              //   <span>{message.replyId}</span>
-              //   <Message
-              //     key={message.text + index}
-              //     message={message}
-              //     removeMessage={removeMessage}
-              //     editMessage={editMessage}
-              //     replyFunc={replyFunc}
-              //   />
-              // </div>
             )
           )}
 

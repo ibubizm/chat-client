@@ -38,6 +38,7 @@ export const ChatBar = ({ rooms, handlerRoom, createUser, createRoom }) => {
   //   room.roomId.toLowerCase().includes(input.toLowerCase())
   // })
   // filtredRooms.sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
+  // usersRooms.sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
 
   return (
     <div className="chat__sidebar">

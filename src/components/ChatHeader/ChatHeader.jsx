@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { subscribe, unsubscribe } from '../../http'
 import './ChatHeader.css'
 import { IoIosArrowBack } from 'react-icons/io'
+import { BsThreeDots } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
@@ -18,12 +19,13 @@ export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
   }
 
   useEffect(() => {
+    console.log(currentRoom.subscribers)
     if (currentRoom.subscribers?.includes(user._id)) {
       setSub(true)
     } else {
       setSub(false)
     }
-  }, [currentRoom, user._id])
+  }, [currentRoom, user._id, sub])
 
   return (
     <div className="chat__header">
@@ -43,11 +45,12 @@ export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
             alt=""
           />
           <div className="chat__header__name">{currentRoom.roomId}</div>
-          {!sub ? (
+          <BsThreeDots className="chat__header__menu" />
+          {/* {!sub ? (
             <div onClick={subscribeToggle}>sub</div>
           ) : (
             <div onClick={unSubscribeToggle}>unsub</div>
-          )}
+          )} */}
         </>
       )}
     </div>

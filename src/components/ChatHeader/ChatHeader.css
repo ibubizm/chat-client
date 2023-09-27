@@ -1,7 +1,8 @@
 .chat__header {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   background: var(--bg-color);
-  padding: 13px 0 6px 20px;
+  padding: 10px 20px;
   width: 100%;
   border-bottom: 1px solid var(--bg-active);
   gap: 12px;
@@ -28,6 +29,17 @@
   border: none;
   background-color: inherit;
   cursor: pointer;
+}
+
+.chat__header__menu {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  color: var(--font-active-color);
+}
+
+.chat__header__menu:hover {
+  color: var(--font-color);
 }
 
 @media (max-width: 540px) {
