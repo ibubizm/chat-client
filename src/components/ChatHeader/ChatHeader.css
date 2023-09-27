@@ -51,7 +51,7 @@
     font-size: 16px;
   }
   .chat__header {
-    padding: 20px;
+    /* padding: 20px; */
   }
 
   .createroom {
@@ -63,5 +63,13 @@
 @media (max-width: 390px) {
   .chat__header__name {
     font-size: 25px;
+    text-align: center;
+  }
+
+  .chat__header__img {
+    display: none;
+  }
+  .chat__header__menu {
+    order: 3;
   }
 }

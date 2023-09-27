@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import sendIcon from './send.svg'
 import './ChatFooter.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUsersRooms, updateUsersRooms } from '../../http'
+import { updateUsersRooms } from '../../http'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { GrEdit } from 'react-icons/gr'
 
@@ -63,11 +63,11 @@ export const ChatFooter = ({
   }
 
   const submitFunc = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     if (toggleEdit.text) {
       onEdit(toggleEdit)
     } else {
-      handleSendMessage()
+      handleSendMessage(e)
     }
   }
   return (

@@ -16,12 +16,12 @@ export const ChatBody = ({
   // const messageRef = useRef(null)
 
   useEffect(() => {
-    if (!loading && messagesEndRef) {
+    if (!loading && messages) {
       messagesEndRef.current?.scrollIntoView({
         behavior: 'smooth',
       })
     }
-  }, [messagesEndRef])
+  }, [messages])
 
   return (
     <>
