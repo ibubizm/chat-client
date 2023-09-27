@@ -63,12 +63,12 @@ export const ChatFooter = ({
   }
 
   const submitFunc = (e) => {
-    // e.preventDefault()
     if (toggleEdit.text) {
       onEdit(toggleEdit)
     } else {
       handleSendMessage(e)
     }
+    e.preventDefault()
   }
   return (
     <div className="chat__footer">
