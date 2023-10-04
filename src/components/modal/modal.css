@@ -43,6 +43,23 @@
   height: 30px;
 }
 
+.subscriber__list {
+  overflow: scroll;
+  height: 300px;
+}
+
+.subscriber__list__item {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.subscriber__list__icon {
+  width: 35px;
+  height: 35px;
+}
+
 /* .input {
   margin-bottom: 10px;
 } */

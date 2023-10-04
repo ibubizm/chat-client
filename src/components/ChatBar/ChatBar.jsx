@@ -10,7 +10,12 @@ import axios from 'axios'
 import { SERVER_URI } from '../../constatnts'
 
 export const ChatBar = ({ rooms, handlerRoom, createUser, createRoom }) => {
-  const { user } = useSelector(({ userReducer }) => userReducer)
+  // const { user } = useSelector(({ userReducer }) => {
+  //   return [...user].sort((a, b) => {
+  //     return Date.parse(b.updatedAt) - Date.parse(a.updatedAt)
+  //   })
+  // })
+
   const { rooms: usersRooms } = useSelector(({ roomReducer }) => roomReducer)
   const [input, setInput] = useState('')
   const [modal, setModal] = useState(false)

@@ -9,7 +9,7 @@
 .chat__main {
   position: relative;
   display: grid;
-  grid-template-rows: 61px 1fr auto;
+  grid-template-rows: auto 1fr auto;
   height: 100vh;
 }
 
@@ -57,7 +57,7 @@
   }
 
   .chat__main-selected {
-    height: 100svh;
+    /* height: 100svh; */
     overflow: visible;
     right: 0;
     transition: 0.2s;

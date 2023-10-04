@@ -124,3 +124,14 @@ export const unsubscribe = (userId, roomId) => async (dispatch) => {
     console.log(e)
   }
 }
+
+export const getSubscribers = async (roomId) => {
+  try {
+    const { data } = await axios.post(SERVER_URI + '/rooms/getSubscribers', {
+      roomId,
+    })
+    return data
+  } catch (e) {
+    console.log(e)
+  }
+}

@@ -23,7 +23,10 @@ export default createReducer(initialState, {
     a.lastMessage = action.payload.lastMessage
   },
   [addRoomToSubscribe]: (state, action) => {
-    state.rooms.push(action.payload)
+    const check = state.rooms.find((i) => i._id === action.payload._id)
+    if (!check) {
+      state.rooms.push(action.payload)
+    }
   },
   [removeRoomToSubscribe]: (state, action) => {
     const newRoom = state.rooms.filter((i) => i._id !== action.payload._id)
