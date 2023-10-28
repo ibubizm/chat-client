@@ -45,7 +45,6 @@ const ChatPage = () => {
     })
   }
   const scrollToMessage = (messageRef) => {
-    console.log(messageRef)
     messageRef.current?.scrollIntoView({
       behavior: 'smooth',
     })

@@ -1,4 +1,5 @@
 .btn {
+  text-transform: capitalize;
   color: var(--message-color);
   background-color: var(--primary-color);
   padding: 20px 30px;
@@ -6,6 +7,7 @@
   outline: none;
   cursor: pointer;
   border: none;
+  text-align: center;
 }
 
 .sm {

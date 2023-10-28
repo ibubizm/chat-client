@@ -24,7 +24,6 @@ export const getUsersRooms = (userId) => async (dispatch) => {
 }
 
 export const updateUsersRooms = (roomId, lastMessage) => async (dispatch) => {
-  console.log('upd')
   const { data } = await axios.post(
     SERVER_URI + '/rooms/updateRooms',
     { roomId, lastMessage },
@@ -107,7 +106,10 @@ export const subscribe = (userId, roomId) => async (dispatch) => {
       userId,
       roomId,
     })
-    dispatch(addRoomToSubscribe(data.room))
+    console.log(data, 'sub')
+    // dispatch(setUser(data.user))
+    dispatch(addRoomToSubscribe({ room: data.room, userId }))
+    // dispatch(addRoomToSubscribe({ room: data.room, userId }))
   } catch (e) {
     console.log(e)
   }
@@ -119,7 +121,11 @@ export const unsubscribe = (userId, roomId) => async (dispatch) => {
       userId,
       roomId,
     })
-    dispatch(removeRoomToSubscribe(data.room))
+
+    console.log(data, 'unsub')
+    // dispatch(setUser(data.user))
+    // console.log(data, 'unsub')
+    dispatch(removeRoomToSubscribe({ room: data.room, userId }))
   } catch (e) {
     console.log(e)
   }

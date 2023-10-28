@@ -16,46 +16,50 @@ export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
 
   const [sub, setSub] = useState([])
   const [modal, setModal] = useState(false)
+  const [hasInSub, setHasInSub] = useState(false)
+  // const [admin, setAdmin] = useState(false)
   const dispatch = useDispatch()
 
   const subscribeToggle = () => {
-    dispatch(subscribe(user._id, currentRoom._id)).then(
-      console.log(subscribers)
-    )
-    console.log(subscribers)
+    dispatch(subscribe(user._id, currentRoom._id)).then(() => {
+      getSubs()
+      // check()
+    })
   }
 
   const unSubscribeToggle = () => {
-    console.log(subscribers)
-    dispatch(unsubscribe(user._id, currentRoom._id))
+    dispatch(unsubscribe(user._id, currentRoom._id)).then(() => {
+      getSubs()
+      // check()
+    })
   }
 
   const toggleModal = () => {
     setModal((modal) => !modal)
+    getSubs()
+    check()
   }
 
-  // const check = () => {
-  //   if (user?.includes(user._id)) {
-  //     return true
-  //   } else return false
-  // }
+  const check = () => {
+    console.log(sub, 'sub')
+    console.log(subscribers, 'subscribers')
+    if (subscribers?.includes(user._id)) {
+      setHasInSub(true)
+    } else setHasInSub(false)
+  }
 
-  useEffect(() => {
-    console.log(subscribers, '------s')
+  const getSubs = () => {
     if (currentRoom) {
-      getSubscribers(currentRoom._id).then(({ subscribers }) => {
-        setSub(subscribers)
+      getSubscribers(currentRoom._id).then((data) => {
+        setSub(data.subscribers)
       })
     }
-  }, [currentRoom])
+  }
 
-  // useEffect(() => {
-  //   if (currentRoom) {
-  //     console.log(sub)
-  //     setSub(currentRoom.subscribers)
-  //     check()
-  //   }
-  // }, [user._id, sub, currentRoom])
+  useEffect(() => {
+    console.log('use effect')
+    check()
+  }, [subscribers])
 
   return (
     <div className="chat__header">
@@ -78,8 +82,6 @@ export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
           <BsThreeDots className="chat__header__menu" onClick={toggleModal} />
           {modal && (
             <Modal title={currentRoom.roomId} onClose={toggleModal}>
-              <div onClick={subscribeToggle}>sub</div>
-              <div onClick={unSubscribeToggle}>unsub</div>
               <div className="subscriber__list">
                 {sub &&
                   sub.map((i) => (
@@ -95,9 +97,19 @@ export const ChatHeader = ({ currentRoom, chatSelected, setChatSelected }) => {
                       )}
 
                       <span>{i.userName}</span>
+                      <span>{currentRoom.admin === i._id ? 'admin' : ''}</span>
                     </div>
                   ))}
               </div>
+              {!hasInSub ? (
+                <div className="btn  access" onClick={subscribeToggle}>
+                  subscribe
+                </div>
+              ) : (
+                <div className="btn  cancel" onClick={unSubscribeToggle}>
+                  unsubscribe
+                </div>
+              )}
             </Modal>
           )}
         </>

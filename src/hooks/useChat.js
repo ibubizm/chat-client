@@ -1,12 +1,10 @@
 import { SERVER_URI } from '../constatnts'
 import { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { io } from 'socket.io-client'
-import { getUsersRooms } from '../http'
 
 export default function useChat() {
   const socket = useRef(null)
-  const dispatch = useDispatch()
 
   const user = useSelector(({ userReducer }) => userReducer.user)
   const currentRoom = useSelector(({ roomReducer }) => roomReducer.currentRoom)
@@ -23,7 +21,7 @@ export default function useChat() {
   // })
 
   const [messages, setMessages] = useState([])
-  const [rooms, setRooms] = useState([])
+  // const [rooms, setRooms] = useState([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {

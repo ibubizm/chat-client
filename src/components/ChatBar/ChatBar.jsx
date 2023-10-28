@@ -77,7 +77,7 @@ export const ChatBar = ({ rooms, handlerRoom, createUser, createRoom }) => {
             )}
           </div>
         )}
-        {usersRooms.length !== 0 ? (
+        {usersRooms !== 0 ? (
           <>
             {input.length !== 0 && (
               <span className="chat__rooms__title">my rooms</span>
@@ -93,7 +93,9 @@ export const ChatBar = ({ rooms, handlerRoom, createUser, createRoom }) => {
               ))}
           </>
         ) : (
-          <div className="chat__empty">create a new chat or find current</div>
+          <div className="chat__rooms__title">
+            create a new chat or find current
+          </div>
         )}
       </div>
 

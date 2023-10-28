@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import './ChatBody.css'
 import { Message } from '../Message/Message'
 import { ReplyMessage } from '../Message/ReplyMessage'
@@ -13,7 +13,6 @@ export const ChatBody = ({
   selectEditMessage,
 }) => {
   const messagesEndRef = useRef(null)
-  // const messageRef = useRef(null)
 
   useEffect(() => {
     if (!loading && messages) {
@@ -31,7 +30,6 @@ export const ChatBody = ({
             !message.replyId ? (
               <Message
                 key={message.text + index}
-                // messageRef={messageRef}
                 message={message}
                 removeMessage={removeMessage}
                 editMessage={editMessage}
@@ -40,7 +38,6 @@ export const ChatBody = ({
               />
             ) : (
               <ReplyMessage
-                // messageRef={messageRef}
                 scrollToMessage={scrollToMessage}
                 key={message._id}
                 replyFunc={replyFunc}
